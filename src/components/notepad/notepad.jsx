@@ -12,16 +12,19 @@ class Notepad extends Component {
 
     constructor (props) {
         super(props)
-        this.state = {content: ""}
+        this.state = {
+            content: props.note ? props.note.content : '',
+        }
     }
-    handleChange =(e) => {
-        const {onAddNote} = this.props
-        const content = e.target.value
-        return onAddNote(content)
-    }
-    handelAddNote = () => {
+    // handleChange =(e) => {
+    //     const {onAddNote} = this.props
+    //     const content = e.target.value
+    //     return onAddNote(content)
+    // }
+    handelAddNote = (e, note) => {
         this.props.onAddNote(this.state.content)
-        this.setState({content:""})
+        const content = e.target.value
+        this.setState(()=> ({content}))
     }
     updateContent = content => {
         this.setState({content})
@@ -43,21 +46,13 @@ class Notepad extends Component {
                    >
                     Hinzufügen
                 </button>
-
-
             </div>
                 <div>
-                    
                 <button
                  onClick={this.handelSearch} >
                     Suche
                 </button>
-
-                    
                 </div>
-
-               
-
             </div>
         )
     }

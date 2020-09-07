@@ -1,6 +1,6 @@
 import {connect}  from 'react-redux';
 import Notepad from '../components/notepad/notepad'
-import { addNote, updateNoteContent } from '../redux/actions/notes';
+import { startAddNotes,updateNoteContent } from '../redux/actions/notes';
 import {getNotesList} from '../redux/selectors/notes'
 
 const mapStateToProps = (state) => ({
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => ({
 
 
 const mapDispatchToProps = (dispatch) => ({
-    onAddNote: (initalContent) => dispatch(addNote(initalContent)),
+    // onAddNote: (intialContent) => dispatch(addNote(intialContent)),
+    onAddNote: (note) => dispatch(startAddNotes(note)),
     onUpdateNoteContent: (id, content) => dispatch(updateNoteContent(id, content)),
 });
 

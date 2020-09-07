@@ -1,4 +1,5 @@
-import {createStore, compose} from 'redux'
+import {createStore, compose, applyMiddleware} from 'redux'
+import thunk from 'redux-thunk'
 import rootReducer from './reducers/root.js';
 import middlewares from './middleware/index.js';
 import {localStorageKey} from './middleware/constants'
@@ -14,8 +15,8 @@ const getLocalStorageState = () => {
 export default createStore(
     rootReducer,
     getLocalStorageState(),
-    composerFunction(middlewares)
+    composerFunction(applyMiddleware(thunk), middlewares)
 )
 
-
+ 
 
