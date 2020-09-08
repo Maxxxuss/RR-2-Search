@@ -48,20 +48,6 @@ export const startAddNotes = (notesData = {}) => {
     }
 }
 
-// export const startAddNotes = (content) => ({
-//     type: actionTypes.addNote, 
-//       ...noteFactory,
-
-//         database.ref('notes').push(content).then((ref)=>{
-//         id: ref.key,
-             
-       
-//         })
-//     })
-
-
-
-
 export const updateNoteContent = (id, content) => ({
     type: actionTypes.updateNoteContent,
     id,
@@ -69,3 +55,25 @@ export const updateNoteContent = (id, content) => ({
 });
 
 
+export const setNotes = (notes) => ({
+    type: actionTypes.setNotes,
+    notes
+  });
+  
+  export const startSetNotes = () => {
+    return (dispatch) => {
+      return database.ref('notes').once('value').then((snapshot) => {
+        const notes = [];
+  
+        snapshot.forEach((childSnapshot) => {
+          notes.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+        });
+  
+        dispatch(setNotes(notes));
+      });
+    };
+  };
+  
