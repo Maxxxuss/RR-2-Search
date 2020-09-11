@@ -6,8 +6,7 @@ import createReducer from './create-reducer.js';
 const initalState = [];
 
 const actionsMap = {
-    [actionTypes.setNotes]: (state, action) => (state, action.notes) ,
-    
+    [actionTypes.setNotes]: (state, action) => (state, action.notes),
     [actionTypes.addNote]: (state, { type, ...newNote }) => state
         .concat([newNote]),
     [actionTypes.updateNoteContent]: (state, action) => state.map(note => ({

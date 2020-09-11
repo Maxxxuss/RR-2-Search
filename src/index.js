@@ -8,7 +8,7 @@ import './firebase/firebase'
 import { startSetNotes } from './redux/actions/notes';
 
 
-
+// weiter 4:30
 
 
 store.dispatch(startSetNotes()).then(()=>{

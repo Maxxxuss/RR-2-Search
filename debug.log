@@ -1,0 +1,14 @@
+[0910/173939.906:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 5256 not found in process
+[0910/173939.937:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 11304 not found in process
+[0910/173939.937:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 1780 not found in process
+[0910/173939.906:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 9064 not found in process
+[0910/173939.937:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 9768 not found in process
+[0910/173939.937:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 7940 not found in process
+[0910/173939.968:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
+[0910/173939.968:ERROR:exception_snapshot_win.cc(99)] thread ID 7116 not found in process
