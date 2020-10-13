@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 // import PropTypes from 'prop-types';
 
 
@@ -30,9 +31,8 @@ class Notepad extends Component {
         this.setState({content})
     }
 
-
-
     render() {
+
           return (
             <div> 
                 <textarea
@@ -46,6 +46,8 @@ class Notepad extends Component {
                    >
                     Hinzufügen
                 </button>
+
+
             </div>
                 <div>
                 <button

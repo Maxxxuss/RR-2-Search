@@ -1,21 +1,27 @@
 import * as firebase from 'firebase'
+import 'firebase/storage';
+import "firebase/database";
 
-const firebaseConfig = {
+
+
+var firebaseConfig = {
     apiKey: "AIzaSyAqBYn9PCUL93kR9X6mOa3BKdH_b0uaLsQ",
     authDomain: "reactsearch-d67f0.firebaseapp.com",
     databaseURL: "https://reactsearch-d67f0.firebaseio.com",
     projectId: "reactsearch-d67f0",
     storageBucket: "reactsearch-d67f0.appspot.com",
     messagingSenderId: "985864023887",
-    appId: "1:985864023887:web:e0fd7f4ace6988f6e9df3a",
-    measurementId: "G-NDV5KV69EE"
-};
+    appId: "1:985864023887:web:cfd73e72a45d6daee9df3a",
+    measurementId: "G-78M1QZMWR4"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
-firebase.initializeApp(firebaseConfig);
+//    const database = firebase.database() 
+//   export const storage = firebase.storage()
+//   export const storageRef = storage.ref()
 
-const database = firebase.database() 
-
-export{firebase, database as default }
+export default firebase
 
 // database.ref('notes').on('value', (snapshot) => {  
 //      const notes = []

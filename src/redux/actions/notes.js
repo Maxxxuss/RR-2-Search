@@ -1,14 +1,9 @@
 
 import { notes as actionTypes } from './action-types.js';
-import database from '../../firebase/firebase'
+import firebase from '../../firebase/firebase'
 
 
-// const noteFactory = (initialContent = '') => {
-//     return {
-//         id: uuidv4(),
-//         content: initialContent,
-//     };
-// }
+
 
 const noteFactory = (note) => {
     // database.ref('notes').push(note).then((ref)=>{
@@ -24,30 +19,38 @@ export const addNote = (note) => ({
        ...noteFactory(note),
   });
 
+export const startAddFile = (notesData = {} ) => {
+  return (dispatch) => {
+      const note ={
+          timestamp: firebase.database.ServerValue.TIMESTAMP,
+          fileUrl: notesData,
+      }     
+    
+      return firebase.database().ref('notes').push(note).then((ref)=>{
+      dispatch(addNote({
+          id: ref.key,
+          ...note 
+          }))        
+      })
+  }
+}
 
-// export const addNote = (note) => ({
-//     type: actionTypes.addNote, 
-//     note
-//   });
 
-export const startAddNotes = (notesData = {}) => {
+export const startAddNotes = (notesData = {}, fileUrl = {}) => {
     return (dispatch) => {
-        const {
-            content = notesData
-        } = notesData
-        const note = {content}
-        
-       return database.ref('notes').push(note).then((ref)=>{
+        const note ={
+            content:  notesData,
+            timestamp: firebase.database.ServerValue.TIMESTAMP,
+            fileUrl: fileUrl,
+        }             
+       return firebase.database().ref('notes').push(note).then((ref)=>{
         dispatch(addNote({
             id: ref.key,
             ...note 
-            }))
-
-          
+            }))        
         })
     }
 }
-
 export const updateNoteContent = (id, content) => ({
     type: actionTypes.updateNoteContent,
     id,
@@ -62,7 +65,7 @@ export const setNotes = (notes) => ({
   
   export const startSetNotes = () => {
     return (dispatch) => {
-      return database.ref('notes').once('value').then((snapshot) => {
+      return firebase.database().ref('notes').once('value').then((snapshot) => {
         const notes = [];
   
         snapshot.forEach((childSnapshot) => {
@@ -77,3 +80,10 @@ export const setNotes = (notes) => ({
     };
   };
   
+
+  export const setUserPosts = setUserPosts => {
+    return{
+    type: actionTypes.setUserPosts,
+    setUserPosts
+    }
+  }
