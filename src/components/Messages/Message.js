@@ -12,14 +12,14 @@ const isImage = note => {
 
 const timeFromNow = timestamp => moment(timestamp).fromNow();
 
-const Message = ({ note, user }) => (
+const Message = ({ notes, user }) => (
   <Comment>
     {/* <Comment.Avatar src={note.user.avatar} /> */}
     {/* <Comment.Content className={isOwnMessage(note, user)}>
       <Comment.Author as="a">{note.user.name}</Comment.Author>
       <Comment.Metadata>{timeFromNow(note.timestamp)}</Comment.Metadata>
       {isImage(note) ? ( */}
-        <Image src={note.image} className="message__image" />
+        <Image src={notes.image} className="message__image" />
       {/* ) : (
         <Comment.Text>{note.content}</Comment.Text>
       )}

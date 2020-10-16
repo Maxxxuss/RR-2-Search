@@ -1,19 +1,30 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { notes } from '../redux/actions/action-types'
+import { Comment, Image,Menu, Item } from "semantic-ui-react";
 
 
-const Note = ({content   }) => (
-  <li>
-    <div>
-      {content}
-    </div>
-      
-  </li>
-)
+class LinkedNotes  extends Component{
+  state = {
+    content: this.props.content, 
+    noteId: this.props.noteID, 
+    notes: [], 
+  }
 
-Note.propTypes = {
-  content: PropTypes.string.isRequired,
-  
+
+
+  render () {
+    const {content, note} = this.state
+  return(
+
+        <li>
+          <div >
+              {content}
+            </div>
+        </li>
+  )
+ }
 }
 
-export default Note
+
+export default LinkedNotes

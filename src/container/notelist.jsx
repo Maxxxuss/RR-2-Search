@@ -1,5 +1,5 @@
 import {connect}  from 'react-redux';
-import NoteList from '../components/notelist'
+import NoteList from '../components/dynNotelist'
 import {getAllNotes} from '../redux/selectors/notes'
 
 const mapStateToProps = state =>( {

@@ -7,7 +7,8 @@ export const getNotesList = createSelector(
     getNotes,
     notes => notes.map(note => ({
         id: note.id,
-        content: note.content
+        content: note.content,
+        fileUrl: note.fileUrl
     }))
 );
 
@@ -16,6 +17,9 @@ export const getAllNotes = createSelector(
     notes => notes.map(note => ({
         id: note.id,
         content: note.content,
+        fileUrl: note.fileUrl,
+        image: note.image,
+
 
     }))
 );

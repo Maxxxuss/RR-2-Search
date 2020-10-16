@@ -3,4 +3,5 @@ export const notes = {
     updateNoteContent: 'notes/updateNoteContent',
     setNotes: 'notes/setNotes',
     setUserPosts: 'notes/setUserPosts',
+    setCurrentNote: 'notes/setCurrentNote',
 };

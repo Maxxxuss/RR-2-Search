@@ -1,6 +1,7 @@
 
 import { notes as actionTypes } from './action-types.js';
 import firebase from '../../firebase/firebase'
+import {v4 as uuidv4 } from 'uuid'
 
 
 
@@ -8,7 +9,6 @@ import firebase from '../../firebase/firebase'
 const noteFactory = (note) => {
     // database.ref('notes').push(note).then((ref)=>{
     return {
-        // id: ref.key,
         ...note
         };
     // })
@@ -19,11 +19,11 @@ export const addNote = (note) => ({
        ...noteFactory(note),
   });
 
-export const startAddFile = (notesData = {} ) => {
+export const startAddFile = (fileUrl = {} ) => {
   return (dispatch) => {
       const note ={
           timestamp: firebase.database.ServerValue.TIMESTAMP,
-          fileUrl: notesData,
+          image: fileUrl,
       }     
     
       return firebase.database().ref('notes').push(note).then((ref)=>{
@@ -35,17 +35,21 @@ export const startAddFile = (notesData = {} ) => {
   }
 }
 
-
 export const startAddNotes = (notesData = {}, fileUrl = {}) => {
+
+
     return (dispatch) => {
-        const note ={
+        const note = {
             content:  notesData,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             fileUrl: fileUrl,
+            id: uuidv4()
+           
+            
         }             
        return firebase.database().ref('notes').push(note).then((ref)=>{
         dispatch(addNote({
-            id: ref.key,
+            id: ref.key,           
             ...note 
             }))        
         })
@@ -87,3 +91,9 @@ export const setNotes = (notes) => ({
     setUserPosts
     }
   }
+
+  export const setCurrentNote = activeNote => ({
+      type: actionTypes.setCurrentNote,
+      currentNote: activeNote     
+    })
+  

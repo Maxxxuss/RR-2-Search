@@ -7,7 +7,7 @@ class NoteList extends Component {
   static propTypes = {
     notes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
-        content: PropTypes.string.isRequired,
+        // content: PropTypes.string.isRequired,
     })),
   }
 
@@ -19,17 +19,13 @@ class NoteList extends Component {
             {notes.map(note =>
             <Note
               key={note.id} 
-              {...note} 
+              {...notes} 
             />
           )} 
          </ul>
         </div>
-
-
       )
     }
-
-
 
 }
 
