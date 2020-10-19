@@ -5,8 +5,7 @@ import { Comment, Image,Menu, Item } from "semantic-ui-react";
 import { notes } from '../redux/actions/action-types.js';
 // import setCurrentNote from '../redux/actions/notes'
 import firebase from '../firebase/firebase'
-
-
+import MessagesHeader from '../components/Messages/MessagesHeader'
 
 class DynNoteList extends Component {
 
@@ -14,10 +13,13 @@ class DynNoteList extends Component {
     activeNote: "", 
     notesRef: firebase.database().ref("notes"),
     actNote: [],
+    searchTerm: "",
+    searchLoading: false,
+    searchResults: []
   }
 
   static propTypes = {
-    activeNote: PropTypes.string,
+    // activeNote: PropTypes.string,
     notes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
         // content: PropTypes.string.isRequired,
@@ -35,66 +37,74 @@ class DynNoteList extends Component {
 
  
     displayLinkedNotes = notes => 
-    notes.map (note => (
+    notes.map(note => (
       <li
         key={note.id} 
         onClick={() => this.changeNote(note)}
-        // active={note.id === this.state.activeNote}
           > 
            # {note.content}
         </li>
       ))
 
- 
-
-  // addListeners () {
-  //   const activeNote = this.state
-  //   this.addMessageListener(activeNote);
-  // };
-
-  //   addMessageListener = activeNote => {
-  //     let loadedNotes = [];
-  //     this.state.notesRef.child(activeNote).on("child_added", snap => {
-  //       loadedNotes.push(snap.val());
-  //       console.log(loadedNotes)
-  //       this.setState({
-  //         actNote: loadedNotes,
-  //         notesLoading: false,
-  //       });
-        
-  //       // this.countUniqueUsers(loadedNotes);
-  //     });
-  //   };
-    
-
-    displayMetadata = (activeNote) => {
+     displayMetadata = (activeNote) => {
   
       return(
           <ul>
             <li>{activeNote.content} </li>
-             <li> {activeNote.id} </li>
-            
+             <li> {activeNote.id} </li>            
           </ul>
-
       )
     }  
 
-      
+    handleSearchChange = event => {
+      this.setState(
+        {
+          searchTerm: event.target.value,
+          searchLoading: true
+        },
+        () => this.handleSearchMessages()
+      );
+    };
+  
+    handleSearchMessages = () => {
+      const notes = this.props.notes
+      const regex = new RegExp(this.state.searchTerm, "gi");
+      const searchResults = notes.reduce((acc, note) => {
+       
+        if (
+          (note.content && note.content.match(regex)) 
+        ) {
+          acc.push(note);
+        }
+        return acc;
+      }, []);
+      this.setState({ searchResults });
+      setTimeout(() => this.setState({ searchLoading: false }), 1000);
+    };
+     
     
     render (){
       const {notes} = this.props
-      const {activeNote} = this.state
+      const {activeNote,searchLoading, searchTerm,searchResults} = this.state
       return (
         <div>
            <div>
-              {this.displayLinkedNotes(notes)}
+             {searchTerm
+             ? this.displayLinkedNotes(searchResults)
+             : this.displayLinkedNotes(notes)}
+             
             </div>
 
             <div>
               <p>Hier stehen die Metadaten</p>
-              {this.displayMetadata(notes, activeNote)}
+              {this.displayMetadata(activeNote)}
             </div>
-      
+
+            <p>Hier stehen die Suchergebnisse</p>
+            <MessagesHeader 
+          handleSearchChange={this.handleSearchChange}
+          searchLoading={searchLoading}
+        />
         </div>
       )
     }
