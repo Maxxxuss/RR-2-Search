@@ -1,5 +1,5 @@
 import {connect}  from 'react-redux';
-import Notepad from '../components/notepad/notepad'
+import AddNote from '../components/Header/AddNote'
 import { startAddNotes,updateNoteContent } from '../redux/actions/notes';
 import {getNotesList} from '../redux/selectors/notes'
 
@@ -18,4 +18,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(Notepad);
+)(AddNote);

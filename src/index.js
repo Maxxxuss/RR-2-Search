@@ -7,6 +7,9 @@ import store from './redux/store.js';
 import './firebase/firebase'
 import { startSetNotes } from './redux/actions/notes';
 
+import "semantic-ui-css/semantic.min.css";
+
+
 
 // weiter 4:30
 

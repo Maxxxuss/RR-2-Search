@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import LinkedNotes from './note.js'
+import LinkedNotes from '../note.js'
 import PropTypes from 'prop-types'
 import { Comment, Image,Menu, Item } from "semantic-ui-react";
-import { notes } from '../redux/actions/action-types.js';
+import { notes } from '../../redux/actions/action-types.js';
 // import setCurrentNote from '../redux/actions/notes'
-import firebase from '../firebase/firebase'
-import MessagesHeader from '../components/Messages/MessagesHeader'
+import firebase from '../../firebase/firebase'
+import NotesSearch from '../Header/NotesSearch'
+import PdfView from '../../components/Docs/pdfView/pdfView'
 
-class DynNoteList extends Component {
+class MetaPad extends Component {
 
   state = {
     activeNote: "", 
@@ -51,7 +52,10 @@ class DynNoteList extends Component {
       return(
           <ul>
             <li>{activeNote.content} </li>
-             <li> {activeNote.id} </li>            
+             <li> {activeNote.id} </li> 
+             <li>
+                 <Image src= {activeNote.image} />  
+              </li>         
           </ul>
       )
     }  
@@ -88,6 +92,11 @@ class DynNoteList extends Component {
       const {activeNote,searchLoading, searchTerm,searchResults} = this.state
       return (
         <div>
+
+        <NotesSearch 
+          handleSearchChange={this.handleSearchChange}
+          searchLoading={searchLoading}
+        />  
            <div>
              {searchTerm
              ? this.displayLinkedNotes(searchResults)
@@ -100,14 +109,20 @@ class DynNoteList extends Component {
               {this.displayMetadata(activeNote)}
             </div>
 
-            <p>Hier stehen die Suchergebnisse</p>
-            <MessagesHeader 
-          handleSearchChange={this.handleSearchChange}
-          searchLoading={searchLoading}
-        />
+            <div>
+              <p> Documents </p>
+              <PdfView
+              file = {activeNote}
+              
+              >
+                
+              </PdfView>
+            </div>
+
+
         </div>
       )
     }
 }
 
-export default DynNoteList
+export default MetaPad

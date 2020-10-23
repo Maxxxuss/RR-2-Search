@@ -1,5 +1,5 @@
 import {connect}  from 'react-redux';
-import DynNoteList from '../components/dynNotelist'
+import MetaPad from '../components/MetaPad/MetaPad'
 import { setCurrentNote } from '../redux/actions/notes';
 import {getNotesList} from '../redux/selectors/notes'
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(DynNoteList);
+)(MetaPad);

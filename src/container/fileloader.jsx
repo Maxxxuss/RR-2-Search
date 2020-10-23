@@ -1,5 +1,5 @@
 import {connect}  from 'react-redux';
-import MessageForm from '../components/Messages/eNoteForm'
+import UploadDoc from '../components/Header/UploadDoc'
 import { startAddFile, updateNoteContent } from '../redux/actions/notes';
 import {getNotesList} from '../redux/selectors/notes'
 
@@ -17,4 +17,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     null,
     mapDispatchToProps,
-)(MessageForm);
+)(UploadDoc);

@@ -4,10 +4,10 @@ import  firebase  from "../../firebase/firebase";
 
 import { Segment, Button, Input } from "semantic-ui-react";
 
-import FileModal from "./fileModal";
+import FileModal from "../Docs/fileModal";
 // import ProgressBar from "./ProgressBar";
 
-class MessageForm extends React.Component {
+class UploadDoc extends React.Component {
 
   state = {
     storageRef: firebase.storage().ref(),
@@ -174,4 +174,4 @@ class MessageForm extends React.Component {
   }
 }
 
-export default MessageForm;
+export default UploadDoc;

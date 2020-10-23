@@ -1,5 +1,5 @@
 import {connect}  from 'react-redux';
-import NoteList from '../components/dynNotelist'
+import MetaPad from '../components/MetaPad/MetaPad'
 import {getAllNotes} from '../redux/selectors/notes'
 
 const mapStateToProps = state =>( {
@@ -9,4 +9,4 @@ const mapStateToProps = state =>( {
 export default connect(
     mapStateToProps,
     null,
-)(NoteList)
+)(MetaPad)

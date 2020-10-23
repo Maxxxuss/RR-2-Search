@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
 
-class Notepad extends Component {
+class AddNote extends Component {
     // static propTypes = {
     //     // content: PropTypes.string.isRequired, 
     //     // id: PropTypes.string.isRequired,
@@ -49,15 +49,10 @@ class Notepad extends Component {
 
 
             </div>
-                <div>
-                <button
-                 onClick={this.handelSearch} >
-                    Suche
-                </button>
-                </div>
+
             </div>
         )
     }
 }
 
-export default Notepad
+export default AddNote
