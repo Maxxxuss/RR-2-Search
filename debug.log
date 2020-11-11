@@ -12,3 +12,6 @@
 [0910/173939.937:ERROR:exception_snapshot_win.cc(99)] thread ID 7940 not found in process
 [0910/173939.968:ERROR:process_reader_win.cc(123)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt. (0xc0000022)
 [0910/173939.968:ERROR:exception_snapshot_win.cc(99)] thread ID 7116 not found in process
+[1103/232602.417:ERROR:directory_reader_win.cc(43)] FindFirstFile: Das System kann den angegebenen Pfad nicht finden. (0x3)
+[1104/001649.780:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\marcu\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\c1a2b930-b5cb-4c97-b0e2-b9f37c2e2690: Das System kann den angegebenen Pfad nicht finden. (0x3)
+[1111/234433.436:ERROR:directory_reader_win.cc(43)] FindFirstFile: Das System kann den angegebenen Pfad nicht finden. (0x3)
