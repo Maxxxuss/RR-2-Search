@@ -16,7 +16,8 @@ class MetaPad extends Component {
     actNote: [],
     searchTerm: "",
     searchLoading: false,
-    searchResults: []
+    searchResults: [],
+    file: ""
   }
 
   static propTypes = {
@@ -34,6 +35,7 @@ class MetaPad extends Component {
 
   setActiveNote = note => {
     this.setState({ activeNote: note });
+    this.setState({ file:  note.image })
   };
 
  
@@ -89,7 +91,7 @@ class MetaPad extends Component {
     
     render (){
       const {notes} = this.props
-      const {activeNote,searchLoading, searchTerm,searchResults} = this.state
+      const {activeNote,searchLoading, searchTerm,searchResults, file} = this.state
       return (
         <div>
 
@@ -109,15 +111,10 @@ class MetaPad extends Component {
               {this.displayMetadata(activeNote)}
             </div>
 
-            <div>
-              <p> Documents </p>
+            
               <PdfView
-              file = {activeNote}
-              
-              >
-                
-              </PdfView>
-            </div>
+              file = {file}
+              />
 
 
         </div>

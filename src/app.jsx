@@ -11,7 +11,7 @@ const App = () => (
 
         <AddNote/>
         <NoteList/> 
-        <PdfView/>
+        {/* <PdfView/> */}
     </div>
 )
 
