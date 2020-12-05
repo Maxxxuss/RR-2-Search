@@ -4,4 +4,6 @@ export const notes = {
     setNotes: 'notes/setNotes',
     setUserPosts: 'notes/setUserPosts',
     setCurrentNote: 'notes/setCurrentNote',
+    startRemoveNotes: 'notes/startRemoveNotes',
+    editNotes:'notes/editNotes,'
 };

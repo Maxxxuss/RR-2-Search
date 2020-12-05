@@ -7,17 +7,19 @@ import { notes } from '../../redux/actions/action-types.js';
 import firebase from '../../firebase/firebase'
 import NotesSearch from '../Header/NotesSearch'
 import PdfView from '../../components/Docs/pdfView/pdfView'
+import AddDataForm from './AddDataForm.js';
 
 class MetaPad extends Component {
 
   state = {
     activeNote: "", 
     notesRef: firebase.database().ref("notes"),
-    actNote: [],
     searchTerm: "",
     searchLoading: false,
     searchResults: [],
-    file: ""
+    file: "",
+    titel:"" ,
+    
   }
 
   static propTypes = {
@@ -28,14 +30,12 @@ class MetaPad extends Component {
     })),
   }
 
-  changeNote = actNote => {
-    this.setActiveNote(actNote);
-    // this.props.onSetCurrentNote(this.state.activeNote);
-  };
 
   setActiveNote = note => {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
+    this.setState({titel: note.content})
+    console.log(this.state.activeNote)
   };
 
  
@@ -43,20 +43,44 @@ class MetaPad extends Component {
     notes.map(note => (
       <li
         key={note.id} 
-        onClick={() => this.changeNote(note)}
+        onClick={() => this.setActiveNote(note)}
           > 
            # {note.content}
         </li>
       ))
 
-     displayMetadata = (activeNote) => {
+      onTitelChange = (e) => {
+        const titel = e.target.value
+        this.setState (()=> ({titel}))
+      }
+    
+
+
+      onNoteEdit = (e) => {
+        e.preventDefault()
+        const content = this.state.titel
+        this.props.startEditNotes (this.state.activeNote.id,{ content})
+      }
+
+
+     displayMetadata = () => {
   
       return(
           <ul>
-            <li>{activeNote.content} </li>
-             <li> {activeNote.id} </li> 
+
+          <input          
+             type="text"
+             placeholder="Metadata-Content"
+             autoFocus
+             className="text-input"
+             value={this.state.titel}
+             onChange={ this.onTitelChange}
+          />         
+          
+             {/* <li>{activeNote.content} </li> */}
+             <li> {this.state.activeNote.id} </li> 
              <li>
-                 <Image src= {activeNote.image} />  
+                 <Image src= {this.state.activeNote.image} />  
               </li>         
           </ul>
       )
@@ -88,17 +112,44 @@ class MetaPad extends Component {
       setTimeout(() => this.setState({ searchLoading: false }), 1000);
     };
      
+    handelRemove = () => {
+      this.props.startRemoveNotes ({id: this.state.activeNote.id})
+    }
     
     render (){
-      const {notes} = this.props
+      const {notes, onAddNote} = this.props
       const {activeNote,searchLoading, searchTerm,searchResults, file} = this.state
       return (
         <div>
 
+          <AddDataForm
+          onAddNote = {onAddNote}
+          />
+
+
+
         <NotesSearch 
           handleSearchChange={this.handleSearchChange}
           searchLoading={searchLoading}
-        />  
+        /> 
+        <div>
+          <button
+          onClick = {this.handelRemove}>
+            Remove-Note
+          </button>
+
+          <button
+          onClick = { this.onNoteEdit}
+          >
+            Änderung Übernehmen 
+          </button>
+
+
+
+
+          </div> 
+
+
            <div>
              {searchTerm
              ? this.displayLinkedNotes(searchResults)
@@ -108,13 +159,14 @@ class MetaPad extends Component {
 
             <div>
               <p>Hier stehen die Metadaten</p>
-              {this.displayMetadata(activeNote)}
+              {this.displayMetadata()}
             </div>
 
             
               <PdfView
               file = {file}
               />
+
 
 
         </div>
