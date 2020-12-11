@@ -40,11 +40,10 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
 
     return (dispatch) => {
         const note = {
-            buzwords: notesData.buzwords, 
-            description: notesData.description, 
-            content: notesData.titel,
+            content:  notesData,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             fileUrl: fileUrl,
+            id: uuidv4()
            
             
         }             
@@ -98,42 +97,3 @@ export const setNotes = (notes) => ({
       currentNote: activeNote     
     })
   
-
-    export const removeNotes = ({ id } = {}) => ({ 
-      type: actionTypes.startRemoveNotes,
-      id
-    });
-    
-    export const startRemoveNotes = ({ id } = {}) => {
-      // return (dispatch) => {
-        return (dispatch,) => {
-    
-          return firebase.database().ref(`notes/${id}`).remove().then(() => {
-    
-        // return database.ref(`notes/${id}`).remove().then(() => {
-          dispatch(({ 
-            type:actionTypes.startRemoveNotes,
-            id
-           }));
-          console.log(id)
-        });
-      };
-    };
-
-    export const editNotes = (id, updates) => ({
-      type: actionTypes.editNotes,
-      id,
-      updates
-    });
-    
-    export const startEditNotes = (id, updates) => {
-      // return (dispatch) => {
-        return (dispatch, getState) => {
-    
-        return firebase.database().ref(`notes/${id}`).update(updates).then(() => {
-    
-        // return database.ref(`notes/${id}`).update(updates).then(() => {
-          dispatch(editNotes(id, updates));
-        });
-      };
-    };
