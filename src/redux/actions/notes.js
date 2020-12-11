@@ -40,10 +40,11 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
 
     return (dispatch) => {
         const note = {
-            content:  notesData,
-            timestamp: firebase.database.ServerValue.TIMESTAMP,
-            fileUrl: fileUrl,
-            id: uuidv4()
+          buzwords: notesData.buzwords, 
+          description: notesData.description, 
+          content: notesData.titel,
+          timestamp: firebase.database.ServerValue.TIMESTAMP,
+          fileUrl: fileUrl,
            
             
         }             
@@ -96,9 +97,6 @@ export const setNotes = (notes) => ({
       type: actionTypes.setCurrentNote,
       currentNote: activeNote     
     })
-<<<<<<< HEAD
-  
-=======
   
 
     export const removeNotes = ({ id } = {}) => ({ 
@@ -139,4 +137,3 @@ export const setNotes = (notes) => ({
         });
       };
     };
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer

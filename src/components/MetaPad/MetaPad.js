@@ -7,27 +7,19 @@ import { notes } from '../../redux/actions/action-types.js';
 import firebase from '../../firebase/firebase'
 import NotesSearch from '../Header/NotesSearch'
 import PdfView from '../../components/Docs/pdfView/pdfView'
-<<<<<<< HEAD
-=======
 import AddDataForm from './AddDataForm.js';
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
 
 class MetaPad extends Component {
 
   state = {
     activeNote: "", 
     notesRef: firebase.database().ref("notes"),
-    actNote: [],
     searchTerm: "",
     searchLoading: false,
     searchResults: [],
-<<<<<<< HEAD
-    file: ""
-=======
     file: "",
     titel:"" ,
     
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
   }
 
   static propTypes = {
@@ -38,19 +30,11 @@ class MetaPad extends Component {
     })),
   }
 
-  changeNote = actNote => {
-    this.setActiveNote(actNote);
-    // this.props.onSetCurrentNote(this.state.activeNote);
-  };
-
   setActiveNote = note => {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
-<<<<<<< HEAD
-=======
     this.setState({titel: note.content})
     console.log(this.state.activeNote)
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
   };
 
  
@@ -58,22 +42,12 @@ class MetaPad extends Component {
     notes.map(note => (
       <li
         key={note.id} 
-        onClick={() => this.changeNote(note)}
+        onClick={() => this.setActiveNote(note)}
           > 
            # {note.content}
         </li>
       ))
 
-<<<<<<< HEAD
-     displayMetadata = (activeNote) => {
-  
-      return(
-          <ul>
-            <li>{activeNote.content} </li>
-             <li> {activeNote.id} </li> 
-             <li>
-                 <Image src= {activeNote.image} />  
-=======
       onTitelChange = (e) => {
         const titel = e.target.value
         this.setState (()=> ({titel}))
@@ -106,7 +80,6 @@ class MetaPad extends Component {
              <li> {this.state.activeNote.id} </li> 
              <li>
                  <Image src= {this.state.activeNote.image} />  
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
               </li>         
           </ul>
       )
@@ -138,28 +111,22 @@ class MetaPad extends Component {
       setTimeout(() => this.setState({ searchLoading: false }), 1000);
     };
      
-<<<<<<< HEAD
-    
-    render (){
-      const {notes} = this.props
-=======
     handelRemove = () => {
       this.props.startRemoveNotes ({id: this.state.activeNote.id})
     }
     
     render (){
       const {notes, onAddNote} = this.props
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
       const {activeNote,searchLoading, searchTerm,searchResults, file} = this.state
       return (
         <div>
+           <AddDataForm
+          onAddNote = {onAddNote}
+          />
 
         <NotesSearch 
           handleSearchChange={this.handleSearchChange}
           searchLoading={searchLoading}
-<<<<<<< HEAD
-        />  
-=======
         /> 
         <div>
           <button
@@ -179,7 +146,6 @@ class MetaPad extends Component {
           </div> 
 
 
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
            <div>
              {searchTerm
              ? this.displayLinkedNotes(searchResults)
@@ -189,11 +155,7 @@ class MetaPad extends Component {
 
             <div>
               <p>Hier stehen die Metadaten</p>
-<<<<<<< HEAD
-              {this.displayMetadata(activeNote)}
-=======
               {this.displayMetadata()}
->>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
             </div>
 
             
