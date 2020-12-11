@@ -96,4 +96,47 @@ export const setNotes = (notes) => ({
       type: actionTypes.setCurrentNote,
       currentNote: activeNote     
     })
+<<<<<<< HEAD
   
+=======
+  
+
+    export const removeNotes = ({ id } = {}) => ({ 
+      type: actionTypes.startRemoveNotes,
+      id
+    });
+    
+    export const startRemoveNotes = ({ id } = {}) => {
+      // return (dispatch) => {
+        return (dispatch,) => {
+    
+          return firebase.database().ref(`notes/${id}`).remove().then(() => {
+    
+        // return database.ref(`notes/${id}`).remove().then(() => {
+          dispatch(({ 
+            type:actionTypes.startRemoveNotes,
+            id
+           }));
+          console.log(id)
+        });
+      };
+    };
+
+    export const editNotes = (id, updates) => ({
+      type: actionTypes.editNotes,
+      id,
+      updates
+    });
+    
+    export const startEditNotes = (id, updates) => {
+      // return (dispatch) => {
+        return (dispatch, getState) => {
+    
+        return firebase.database().ref(`notes/${id}`).update(updates).then(() => {
+    
+        // return database.ref(`notes/${id}`).update(updates).then(() => {
+          dispatch(editNotes(id, updates));
+        });
+      };
+    };
+>>>>>>> parent of 65eecbf... Component Notelist splittet, next Step: work on reducer
