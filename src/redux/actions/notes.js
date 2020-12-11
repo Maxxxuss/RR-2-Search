@@ -120,24 +120,20 @@ export const setNotes = (notes) => ({
       };
     };
 
-    export const editNotes = (notes, id) => ({
+    export const editNotes = (id, updates) => ({
       type: actionTypes.editNotes,
       id,
-     notes
-   
+      updates
     });
     
-    export const startEditNotes = (id, updates = {}) => {
+    export const startEditNotes = (id, updates) => {
       // return (dispatch) => {
-        return (dispatch) => {
-          const note = {
-            content : updates.titel
-          }
+        return (dispatch, getState) => {
     
-        return firebase.database().ref(`notes/${id}`).update(note).then(() => {
+        return firebase.database().ref(`notes/${id}`).update(updates).then(() => {
     
         // return database.ref(`notes/${id}`).update(updates).then(() => {
-          dispatch(editNotes(id, note));
+          dispatch(editNotes(id, updates));
         });
       };
     };

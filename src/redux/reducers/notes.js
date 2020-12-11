@@ -9,13 +9,11 @@ const actionsMap = {
     [actionTypes.setNotes]: (state, action) => (state, action.notes),
     [actionTypes.addNote]: (state, { type, ...newNote }) => state
         .concat([newNote]),
-    [actionTypes.editNotes]: (state, action, id) => state.map(note => ({
-            note,
-            id : id,
-            content: action.content,    })),
-    // [actionTypes.editNotes]: (state, action) => (state, action.notes),
-    
-    
+    [actionTypes.updateNoteContent]: (state, action) => state.map(note => ({
+            ...note,
+            content: action.content,
+        })
+    ),
 };
 
 export default createReducer(initalState, actionsMap);

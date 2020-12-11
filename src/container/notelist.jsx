@@ -11,7 +11,7 @@ const mapStateToProps = state =>( {
 const mapDispatchToProps = (dispatch) => ({
     // onSetCurrentNote: (activeNote) => dispatch(setCurrentNote(activeNote)), // setNotes - prüfen 
     startRemoveNotes: (id) => dispatch(startRemoveNotes(id)), // setNotes - prüfen 
-    startEditNotes: (id, note) => dispatch(startEditNotes(id, note)),
+    startEditNotes: (id, updates) => dispatch(startEditNotes(id, updates)),
     onAddNote: (note) => dispatch(startAddNotes(note)),
 
 });
