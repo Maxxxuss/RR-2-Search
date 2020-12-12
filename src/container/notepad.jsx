@@ -1,11 +1,11 @@
 import {connect}  from 'react-redux';
 import AddNote from '../components/Header/AddNote'
 import { startAddNotes,updateNoteContent } from '../redux/actions/notes';
-import {getNotesList} from '../redux/selectors/notes'
+import {getAllNotes, getNotesList} from '../redux/selectors/notes'
 
 const mapStateToProps = (state) => ({
-    id: getNotesList(state),
-    content: getNotesList(state),
+    id: getAllNotes(state),
+    content: getAllNotes(state),
 });
 
 

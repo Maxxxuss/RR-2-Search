@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import LinkedNotes from '../note.js'
 import PropTypes from 'prop-types'
 import { Comment, Image,Menu, Item } from "semantic-ui-react";
 import { notes } from '../../redux/actions/action-types.js';
@@ -18,7 +17,7 @@ class MetaPad extends Component {
     searchLoading: false,
     searchResults: [],
     file: "",
-    titel:"" ,
+    content: "" ,
     
   }
 
@@ -33,7 +32,7 @@ class MetaPad extends Component {
   setActiveNote = note => {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
-    this.setState({titel: note.content})
+    this.setState({content: note.content})
     console.log(this.state.activeNote)
   };
 
@@ -48,16 +47,16 @@ class MetaPad extends Component {
         </li>
       ))
 
-      onTitelChange = (e) => {
-        const titel = e.target.value
-        this.setState (()=> ({titel}))
+      oncontentChange = (e) => {
+        const content = e.target.value
+        this.setState (()=> ({content}))
       }
     
 
 
       onNoteEdit = (e) => {
         e.preventDefault()
-        const content = this.state.titel
+        const content = this.state.content
         this.props.startEditNotes (this.state.activeNote.id,{ content})
       }
 
@@ -72,11 +71,10 @@ class MetaPad extends Component {
              placeholder="Metadata-Content"
              autoFocus
              className="text-input"
-             value={this.state.titel}
-             onChange={ this.onTitelChange}
+             value={this.state.content}
+             onChange={ this.oncontentChange}
           />         
           
-             {/* <li>{activeNote.content} </li> */}
              <li> {this.state.activeNote.id} </li> 
              <li>
                  <Image src= {this.state.activeNote.image} />  
@@ -140,12 +138,7 @@ class MetaPad extends Component {
             Änderung Übernehmen 
           </button>
 
-
-
-
           </div> 
-
-
            <div>
              {searchTerm
              ? this.displayLinkedNotes(searchResults)
@@ -162,7 +155,6 @@ class MetaPad extends Component {
               <PdfView
               file = {file}
               />
-
 
         </div>
       )

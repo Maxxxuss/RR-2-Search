@@ -1,52 +1,52 @@
-import React, {Component} from 'react';
-import Note from './note.js'
-import PropTypes from 'prop-types'
+// import React, {Component} from 'react';
+// import Note from './note.js'
+// import PropTypes from 'prop-types'
 
-class NoteList extends Component {
+// class NoteList extends Component {
 
-  static propTypes = {
-    notes: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        // content: PropTypes.string.isRequired,
-    })),
-  }
+//   static propTypes = {
+//     notes: PropTypes.arrayOf(PropTypes.shape({
+//         id: PropTypes.string.isRequired,
+//         // content: PropTypes.string.isRequired,
+//     })),
+//   }
 
-    render (){
-      const {notes} = this.props
-      return (
-        <div>
-          <ul> 
-            {notes.map(note =>
-            <Note
-              key={note.id} 
-              {...notes} 
-            />
-          )} 
-         </ul>
-        </div>
-      )
-    }
+//     render (){
+//       const {notes} = this.props
+//       return (
+//         <div>
+//           <ul> 
+//             {notes.map(note =>
+//             <Note
+//               key={note.id} 
+//               {...notes} 
+//             />
+//           )} 
+//          </ul>
+//         </div>
+//       )
+//     }
 
-}
-
-
-// const NoteList = ({notes})=> (
-//   <ul> 
-//       {notes.map(note =>
-//       <Note
-//         key={note.id} 
-//         {...notes} 
-//       />
-//       )}
-//   </ul>
-// )
-
-
-// NoteList.propTypes = {
-// notes: PropTypes.arrayOf(PropTypes.shape({
-//     content: PropTypes.string.isRequired,
-//     id: PropTypes.string.isRequired,
-//   }).isRequired).isRequired,
 // }
 
-export default NoteList
+
+// // const NoteList = ({notes})=> (
+// //   <ul> 
+// //       {notes.map(note =>
+// //       <Note
+// //         key={note.id} 
+// //         {...notes} 
+// //       />
+// //       )}
+// //   </ul>
+// // )
+
+
+// // NoteList.propTypes = {
+// // notes: PropTypes.arrayOf(PropTypes.shape({
+// //     content: PropTypes.string.isRequired,
+// //     id: PropTypes.string.isRequired,
+// //   }).isRequired).isRequired,
+// // }
+
+// export default NoteList

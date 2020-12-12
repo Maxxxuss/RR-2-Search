@@ -127,13 +127,10 @@ export const setNotes = (notes) => ({
     });
     
     export const startEditNotes = (id, updates) => {
-      // return (dispatch) => {
-        return (dispatch, getState) => {
+        return (dispatch) => {
     
         return firebase.database().ref(`notes/${id}`).update(updates).then(() => {
-    
-        // return database.ref(`notes/${id}`).update(updates).then(() => {
-          dispatch(editNotes(id, updates));
+              dispatch(editNotes(id, updates));
         });
       };
     };
