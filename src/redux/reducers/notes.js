@@ -25,7 +25,9 @@ const actionsMap = {
         } else {
           return note;
         };
-    }))
+    })),
+    [actionTypes.startRemoveNotes]: (state, action) => (state.filter(({ id }) => id !== action.id)),
+
 }
 
 export default createReducer(initalState, actionsMap);
