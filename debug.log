@@ -15,3 +15,4 @@
 [1103/232602.417:ERROR:directory_reader_win.cc(43)] FindFirstFile: Das System kann den angegebenen Pfad nicht finden. (0x3)
 [1104/001649.780:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\marcu\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\c1a2b930-b5cb-4c97-b0e2-b9f37c2e2690: Das System kann den angegebenen Pfad nicht finden. (0x3)
 [1111/234433.436:ERROR:directory_reader_win.cc(43)] FindFirstFile: Das System kann den angegebenen Pfad nicht finden. (0x3)
+[1212/235401.740:ERROR:directory_reader_win.cc(43)] FindFirstFile: Das System kann den angegebenen Pfad nicht finden. (0x3)

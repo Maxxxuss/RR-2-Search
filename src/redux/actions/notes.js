@@ -3,9 +3,6 @@ import { notes as actionTypes } from './action-types.js';
 import firebase from '../../firebase/firebase'
 import {v4 as uuidv4 } from 'uuid'
 
-
-
-
 const noteFactory = (note) => {
     // database.ref('notes').push(note).then((ref)=>{
     return {
@@ -62,7 +59,6 @@ export const updateNoteContent = (id, content) => ({
     content,
 });
 
-
 export const setNotes = (notes) => ({
     type: actionTypes.setNotes,
     notes
@@ -84,7 +80,6 @@ export const setNotes = (notes) => ({
       });
     };
   };
-  
 
   export const setUserPosts = setUserPosts => {
     return{
@@ -97,7 +92,6 @@ export const setNotes = (notes) => ({
       type: actionTypes.setCurrentNote,
       currentNote: activeNote     
     })
-  
 
     export const removeNotes = ({ id } = {}) => ({ 
       type: actionTypes.startRemoveNotes,
@@ -134,3 +128,23 @@ export const setNotes = (notes) => ({
         });
       };
     };
+
+    export const addTrash  = (note) => ({
+      type: actionTypes.addTrash,
+         ...noteFactory(note),
+    });
+  
+    export const startAddTrash = (trashData = {}) => {
+      return (dispatch) => {
+          const trash = {
+        trashData, 
+        trashTimeStamp: firebase.database.ServerValue.TIMESTAMP,                                 
+          }      
+         return firebase.database().ref('trash').push(trash).then(()=>{
+          dispatch(({
+            type: actionTypes.addTrash,
+            trash
+              }))        
+          })               
+      }
+  }

@@ -16,9 +16,9 @@ export const getAllNotes = createSelector(
     getNotes,
     notes => notes.map(note => ({
         id: note.id,
-        content: note.content,
-        fileUrl: note.fileUrl,
-        image: note.image,
+        content: note.content ? note.content : "",
+        fileUrl: note.fileUrl ? note.fileUrl : "",
+        image: note.image ? note.image : "",
 
 
     }))

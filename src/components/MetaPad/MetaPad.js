@@ -11,6 +11,7 @@ import AddDataForm from './AddDataForm.js';
 class MetaPad extends Component {
 
   state = {
+    selectedNote: "",
     activeNote: "", 
     notesRef: firebase.database().ref("notes"),
     searchTerm: "",
@@ -33,7 +34,9 @@ class MetaPad extends Component {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
     this.setState({content: note.content})
+    this.setState({selectedNote: note})
     console.log(this.state.activeNote)
+
   };
 
  
@@ -110,7 +113,9 @@ class MetaPad extends Component {
     };
      
     handelRemove = () => {
-      this.props.startRemoveNotes ({id: this.state.activeNote.id})
+      const trashData = { trashData : this.state.activeNote}    
+        this.props.startAddTrash ( this.state.activeNote)
+        this.props.startRemoveNotes ({id: this.state.activeNote.id})
     }
     
     render (){
