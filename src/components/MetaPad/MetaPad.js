@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
-import { Comment, Image,Menu, Item } from "semantic-ui-react";
-import { notes } from '../../redux/actions/action-types.js';
-// import setCurrentNote from '../redux/actions/notes'
+import { Image } from "semantic-ui-react";
 import firebase from '../../firebase/firebase'
 import NotesSearch from '../Header/NotesSearch'
 import PdfView from '../../components/Docs/pdfView/pdfView'
@@ -19,14 +17,14 @@ class MetaPad extends Component {
     searchResults: [],
     file: "",
     content: "" ,
+    notes: this.props.notes,
+    trashData: true
     
   }
 
   static propTypes = {
-    // activeNote: PropTypes.string,
     notes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
-        // content: PropTypes.string.isRequired,
     })),
   }
 
@@ -39,8 +37,17 @@ class MetaPad extends Component {
 
   };
 
+  displayNotes = ({notes = this.props.notes} ) => {
+    const trashData = this.state.trashData
+    if (trashData === true) {
+      console.log(notes)
+      this.displayLinkedNotes(notes)
+    } else {
+    }
+  }
  
-    displayLinkedNotes = notes => 
+    displayLinkedNotes = (notes) => 
+    
     notes.map(note => (
       <li
         key={note.id} 
@@ -117,10 +124,15 @@ class MetaPad extends Component {
         this.props.startAddTrash ( this.state.activeNote)
         this.props.startRemoveNotes ({id: this.state.activeNote.id})
     }
+
+    showTrash = () => {
+      const trashData = true
+      this.setState({trashData})
+    }
     
     render (){
       const {notes, onAddNote} = this.props
-      const {activeNote,searchLoading, searchTerm,searchResults, file} = this.state
+      const {searchLoading, searchTerm,searchResults, file} = this.state
       return (
         <div>
            <AddDataForm
@@ -131,6 +143,15 @@ class MetaPad extends Component {
           handleSearchChange={this.handleSearchChange}
           searchLoading={searchLoading}
         /> 
+        <div>
+          <button
+          onClick = {this.displayNotes}
+          >
+            Show-Trash
+          </button>
+        </div>
+
+
         <div>
           <button
           onClick = {this.handelRemove}>
@@ -147,16 +168,15 @@ class MetaPad extends Component {
            <div>
              {searchTerm
              ? this.displayLinkedNotes(searchResults)
-             : this.displayLinkedNotes(notes)}
-             
+             : this.displayLinkedNotes(notes)
+             }
+
             </div>
 
             <div>
               <p>Hier stehen die Metadaten</p>
               {this.displayMetadata()}
             </div>
-
-            
               <PdfView
               file = {file}
               />

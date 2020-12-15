@@ -1,10 +1,9 @@
 import React from "react";
-import { Header, Segment, Input, Icon } from "semantic-ui-react";
+import { Header, Segment, Input } from "semantic-ui-react";
 
 class NotesSearch extends React.Component {
   render() {
     const {
-      channelName,
       handleSearchChange,
       searchLoading
     } = this.props;

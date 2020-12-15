@@ -1,14 +1,11 @@
 
 import { notes as actionTypes } from './action-types.js';
 import firebase from '../../firebase/firebase'
-import {v4 as uuidv4 } from 'uuid'
 
 const noteFactory = (note) => {
-    // database.ref('notes').push(note).then((ref)=>{
     return {
         ...note
         };
-    // })
 }
 
 export const addNote = (note) => ({
@@ -53,11 +50,6 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
         })
     }
 }
-export const updateNoteContent = (id, content) => ({
-    type: actionTypes.updateNoteContent,
-    id,
-    content,
-});
 
 export const setNotes = (notes) => ({
     type: actionTypes.setNotes,
@@ -80,31 +72,12 @@ export const setNotes = (notes) => ({
       });
     };
   };
-
-  export const setUserPosts = setUserPosts => {
-    return{
-    type: actionTypes.setUserPosts,
-    setUserPosts
-    }
-  }
-
-  export const setCurrentNote = activeNote => ({
-      type: actionTypes.setCurrentNote,
-      currentNote: activeNote     
-    })
-
-    export const removeNotes = ({ id } = {}) => ({ 
-      type: actionTypes.startRemoveNotes,
-      id
-    });
-    
+  
     export const startRemoveNotes = ({ id } = {}) => {
-      // return (dispatch) => {
         return (dispatch,) => {
     
           return firebase.database().ref(`notes/${id}`).remove().then(() => {
     
-        // return database.ref(`notes/${id}`).remove().then(() => {
           dispatch(({ 
             type:actionTypes.startRemoveNotes,
             id
@@ -148,3 +121,25 @@ export const setNotes = (notes) => ({
           })               
       }
   }
+
+  export const setTrash = (trashNotes) => ({
+    type: actionTypes.setNotes,
+    trashNotes
+  });
+  
+  export const startSetTrash = () => {
+    return (dispatch) => {
+      return firebase.database().ref('trash').once('value').then((snapshot) => {
+        const trashNotes = [];
+  
+        snapshot.forEach((childSnapshot) => {
+          trashNotes.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+        });
+  
+        dispatch(setNotes(trashNotes));
+      });
+    };
+  };

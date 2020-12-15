@@ -4,12 +4,6 @@ import React, { Component } from 'react';
 
 
 class AddNote extends Component {
-    // static propTypes = {
-    //     // content: PropTypes.string.isRequired, 
-    //     // id: PropTypes.string.isRequired,
-    //     onAddNote: PropTypes.func.isRequired, 
-    //     onUpdateNoteContent: PropTypes.func.isRequired,
-    // }
 
     constructor (props) {
         super(props)

@@ -9,12 +9,6 @@ const actionsMap = {
     [actionTypes.setNotes]: (state, action) => (state, action.notes),
     [actionTypes.addNote]: (state, { type, ...newNote }) => state
         .concat([newNote]),
-    // [actionTypes.editNotes]: (state, action) => state.map(notes => 
-    //     ({
-    //         // ...notes,
-    //         content: action.content,
-    //     })
-    // ),
     [actionTypes.editNotes] : (state, action) => (
     state.map((note) => {
         if (note.id === action.id) {

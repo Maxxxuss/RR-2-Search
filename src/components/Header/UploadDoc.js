@@ -2,10 +2,9 @@ import React from "react";
 import {v4 as uuidv4} from "uuid";
 import  firebase  from "../../firebase/firebase";
 
-import { Segment, Button, Input } from "semantic-ui-react";
+import { Segment, Button } from "semantic-ui-react";
 
 import FileModal from "../Docs/fileModal";
-// import ProgressBar from "./ProgressBar";
 
 class UploadDoc extends React.Component {
 
@@ -23,8 +22,6 @@ class UploadDoc extends React.Component {
     messagesRef: firebase.database().ref("notess"),
 
   };
-
-// WEiter mit aufruf der ACtion durch eNoteForm --> damit zumindest Timestamp beim klick auf "Upüload " erfüllt sit 
 
   openModal = () => this.setState({ modal: true });
 
@@ -62,8 +59,6 @@ class UploadDoc extends React.Component {
   };
 
   uploadFile = (file, metadata) => {
-    const pathToUpload = 1;
-    const ref = this.props.messagesRef;
     const filePath = `chat/public/${uuidv4()}.jpg`;
 
 
@@ -109,7 +104,7 @@ class UploadDoc extends React.Component {
     );
   };
  
-  sendFileMessage = (fileUrl, ref) => {
+  sendFileMessage = (ref) => {
     ref
       .push()
       .set(this.props.onAddNote(this.state.fileUrl))
@@ -118,7 +113,7 @@ class UploadDoc extends React.Component {
       })
   };
 
-  handelAddNote = (downloadUrl, file, metadata) => {
+  handelAddNote = (downloadUrl) => {
     const fileUrl = downloadUrl
     this.setState(()=> ({fileUrl}))
     this.props.onAddNote(this.state.fileUrl)  
@@ -126,25 +121,11 @@ class UploadDoc extends React.Component {
 
   render() {
     // prettier-ignore
-    const { errors, note, loading, modal, uploadState, percentUploaded } = this.state;
+    const {loading, modal } = this.state;
 
     return (
       <Segment className="message__form">
-        {/* <Input
-          fluid
-          name="note"
-          onChange={this.handleChange}
-          value={note}
-          style={{ marginBottom: "0.7em" }}
-          label={<Button icon={"add"} />}
-          labelPosition="left"
-          className={
-            errors.some(error => error.note.includes("note"))
-              ? "error"
-              : ""
-          }
-          placeholder="Write your note"
-        /> */}
+
         <Button.Group icon widths="2">
         <Button
             onClick={this.sendMessage}

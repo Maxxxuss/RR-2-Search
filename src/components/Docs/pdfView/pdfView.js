@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import * as  cors from "cors"
 
 
-// import { Document, Page } from "react-pdf/dist/entry.webpack"
 import { Document, Page, pdfjs } from "react-pdf";
-import sample from './sample.pdf'
 
 export default class PdfView extends Component {
 
-// https://stackoverflow.com/questions/37760695/firebase-storage-and-access-control-allow-origin/37765371
   state = {
      numPages: null,
      pageNumber: 1,

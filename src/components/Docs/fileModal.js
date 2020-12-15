@@ -1,8 +1,6 @@
 import React from "react";
 import mime from "mime-types";
 import { Modal, Input, Button, Icon } from "semantic-ui-react";
-import { pdf } from "@react-pdf/renderer";
-
 class FileModal extends React.Component {
   state = {
     file: null,
