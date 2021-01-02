@@ -32,13 +32,15 @@ export const startAddFile = (fileUrl = {} ) => {
 export const startAddNotes = (notesData = {}, fileUrl = {}) => {
 
 
-    return (dispatch) => {
-        const note = {
-          buzwords: notesData.buzwords, 
-          description: notesData.description, 
-          content: notesData.titel,
-          timestamp: firebase.database.ServerValue.TIMESTAMP,
-          fileUrl: fileUrl,
+    return (dispatch, getState) => {
+      const uid = getState().auth.uid
+
+      const note = {
+        buzwords: notesData.buzwords, 
+        description: notesData.description, 
+        content: notesData.titel,
+        timestamp: firebase.database.ServerValue.TIMESTAMP,
+        fileUrl: fileUrl,
            
             
         }             
@@ -57,8 +59,13 @@ export const setNotes = (notes) => ({
   });
   
   export const startSetNotes = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+      // const uid = getState().auth.uid
+
       return firebase.database().ref('notes').once('value').then((snapshot) => {
+        // return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+
+        
         const notes = [];
   
         snapshot.forEach((childSnapshot) => {
@@ -143,3 +150,24 @@ export const setNotes = (notes) => ({
       });
     };
   };
+
+  export const login = (uid) => ({
+    type: actionTypes.login,
+    uid
+  });
+  
+  export const startLogin = () => {
+    return () => {
+      return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    };
+  };
+  
+  export const logout = () => ({
+    type: actionTypes.logout
+  });
+  
+  export const startLogout = () => {
+    return () => {
+      return firebase.auth().signOut();
+    };
+  }; 

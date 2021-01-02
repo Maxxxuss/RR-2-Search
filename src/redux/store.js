@@ -3,6 +3,9 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers/root.js';
 import middlewares from './middleware/index.js';
 import {localStorageKey} from './middleware/constants'
+import authReducer from './reducers/auth'
+
+
 
 
 const composerFunction = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

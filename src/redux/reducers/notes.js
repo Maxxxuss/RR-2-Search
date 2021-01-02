@@ -21,7 +21,11 @@ const actionsMap = {
         };
     })),
     [actionTypes.startRemoveNotes]: (state, action) => (state.filter(({ id }) => id !== action.id)),
+    [actionTypes.login]:(state, action) => (state, action.uid), 
+    
 
 }
 
 export default createReducer(initalState, actionsMap);
+
+// weiiter 4:44

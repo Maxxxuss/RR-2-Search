@@ -1,3 +1,4 @@
+import { auth } from 'firebase';
 import { createSelector } from 'reselect';
 
 export const getNotes = state => state.notes;
@@ -9,6 +10,7 @@ export const getAllNotes = createSelector(
         content: note.content ? note.content : "",
         fileUrl: note.fileUrl ? note.fileUrl : "",
         image: note.image ? note.image : "",
+        uid: "" 
 
 
     }))

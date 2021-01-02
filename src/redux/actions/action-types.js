@@ -5,4 +5,6 @@ export const notes = {
     editNotes:'notes/editNotes',
     addTrash:'notes/addTrash',
     setTrash: 'notes/setTrash',
+    login: 'notes/login',
+    logout: 'notes/logout',
 };

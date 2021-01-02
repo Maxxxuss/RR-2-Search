@@ -1,13 +1,15 @@
 import React from 'react';
 import NoteList from './container/notelist'
 import UploadDoc from './container/fileloader'
+import AppRouter from './router/AppRouter';
 
 
 const App = () => (
     <div>
-        <UploadDoc />
+        <AppRouter />
+        {/* <UploadDoc />
 
-        <NoteList/> 
+        <NoteList/>  */}
     </div>
 )
 
