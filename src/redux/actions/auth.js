@@ -5,7 +5,7 @@
 //   uid
 // });
 
-// export const startLogin = () => {
+// export const firstStartLogin = () => {
 //   return () => {
 //     return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
 //   };

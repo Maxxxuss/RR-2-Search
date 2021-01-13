@@ -5,7 +5,7 @@ import App from './app';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import firebase from './firebase/firebase'
-import { startSetNotes, login, logout } from './redux/actions/notes';
+import { startSetNotes, login, logout, startSetLogin } from './redux/actions/notes';
 import {history} from './router/AppRouter'
 
 import "semantic-ui-css/semantic.min.css";
@@ -29,13 +29,11 @@ store.dispatch(startSetNotes()).then(()=>{
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    store.dispatch(login(user.uid));
-    store.dispatch(startSetNotes()).then(() => {
+    store.dispatch(startSetLogin(user.uid));
       renderApp();
       if (history.location.pathname === '/') {
         history.push('/metapad');
-      }
-    });
+    };
   } else {
     store.dispatch(logout());
     renderApp();

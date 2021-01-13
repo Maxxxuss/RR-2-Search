@@ -7,4 +7,5 @@ export const notes = {
     setTrash: 'notes/setTrash',
     login: 'notes/login',
     logout: 'notes/logout',
+    startSetLogin: 'notes/startSetLogin'
 };

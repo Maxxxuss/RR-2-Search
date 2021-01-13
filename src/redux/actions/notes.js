@@ -155,8 +155,26 @@ export const setNotes = (notes) => ({
     type: actionTypes.login,
     uid
   });
+
+  export const startSetLogin = (uid) => 
+
+  ({  type: actionTypes.login,
+    uid})
+
+    // {
+    // return (dispatch, getState) => {
+    //   return firebase.database().ref('notes').once('value').then((snapshot) => {
+        
+    //     const loginData = {
+    //       uid: uid
+    //     };
   
-  export const startLogin = () => {
+    //     dispatch(login(loginData));
+    //   });
+    // };
+  // };
+  
+  export const firstStartLogin = () => {
     return () => {
       return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
     };

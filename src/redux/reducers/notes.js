@@ -21,7 +21,8 @@ const actionsMap = {
         };
     })),
     [actionTypes.startRemoveNotes]: (state, action) => (state.filter(({ id }) => id !== action.id)),
-    [actionTypes.login]:(state, action) => (state, action.uid), 
+
+
     
 
 }
