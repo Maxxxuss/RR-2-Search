@@ -18,7 +18,8 @@ class MetaPad extends Component {
     file: "",
     content: "" ,
     notes: this.props.notes,
-    trashData: true
+    trashData: true,
+  
     
   }
 
@@ -33,6 +34,8 @@ class MetaPad extends Component {
     this.setState({ file:  note.image })
     this.setState({content: note.content})
     this.setState({selectedNote: note})
+    this.setState({categorie: note.categorie})
+
     console.log(this.state.activeNote)
 
   };
@@ -46,6 +49,17 @@ class MetaPad extends Component {
     }
   }
  
+  // displayLinkedNotes = (notes) => 
+    
+  // notes.map(note => (
+  //   <li
+  //     key={note.id} 
+  //     onClick={() => this.setActiveNote(note)}
+  //       > 
+  //        # {note.content}
+  //     </li>
+  //   ))
+
     displayLinkedNotes = (notes) => 
     
     notes.map(note => (

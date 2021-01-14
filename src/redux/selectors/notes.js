@@ -10,8 +10,7 @@ export const getAllNotes = createSelector(
         content: note.content ? note.content : "",
         fileUrl: note.fileUrl ? note.fileUrl : "",
         image: note.image ? note.image : "",
-        uid: "" 
-
+        categorie: note.categorie ? note.categorie : ""
 
     }))
 );

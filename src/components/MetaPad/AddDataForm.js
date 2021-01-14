@@ -11,6 +11,7 @@ export default class AddDataForm extends React.Component {
       titel: "",
       description:"",
       buzwords:"", 
+      categorie: ""
 
     };
   }
@@ -29,6 +30,11 @@ export default class AddDataForm extends React.Component {
     this.setState (()=> ({buzwords }))
   }
 
+  onCategorieChange = (e) => {
+    const categorie = e.target.value
+    this.setState (()=> ({ categorie }))
+  }
+
 
   handelAddNote = (e) => {
     e.preventDefault();
@@ -37,15 +43,19 @@ export default class AddDataForm extends React.Component {
         titel: this.state.titel,
         description: this.state.description,
         buzwords: this.state.buzwords,     
+        categorie : this.state.categorie
       });
       const titel = e.target.value
       const description = e.target.value
       const buzwords = e.target.value
+      const categorie = e.target.value
 
 
       this.setState(()=> ({titel}))
       this.setState(()=> ({description}))
       this.setState(()=> ({buzwords}))
+      this.setState(()=> ({categorie}))
+
     }
 
   
@@ -79,6 +89,14 @@ export default class AddDataForm extends React.Component {
           value={this.state.buzwords}
           // value={this.props.activeNote.buzwords || ""}
           onChange={this.onBuzWordsChange}
+         />
+        <input
+          type = "text"
+          placeholder=" Categorie"
+          className="textarea"
+          value={this.state.categorie}
+          // value={this.props.activeNote.buzwords || ""}
+          onChange={this.onCategorieChange}
          />
 
           

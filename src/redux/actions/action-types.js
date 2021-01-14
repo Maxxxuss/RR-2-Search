@@ -1,3 +1,5 @@
+import { setNotesCategorie } from "./notes";
+
 export const notes = {
     addNote: 'notes/addNote',
     setNotes: 'notes/setNotes',
@@ -7,5 +9,7 @@ export const notes = {
     setTrash: 'notes/setTrash',
     login: 'notes/login',
     logout: 'notes/logout',
-    startSetLogin: 'notes/startSetLogin'
+    startSetLogin: 'notes/startSetLogin',
+    // setNotesCategorie : 'notes/setNotesCategorie',
+    setCategorie: 'notes/setCategorie',
 };

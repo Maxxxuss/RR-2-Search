@@ -43,8 +43,7 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
         content: notesData.titel,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
         fileUrl: fileUrl,
-           
-            
+        categorie: notesData.categorie,
         }             
        return firebase.database().ref(`users/${uid}/notes`).push(note).then((ref)=>{
         dispatch(addNote({
@@ -78,6 +77,33 @@ export const setNotes = (notes) => ({
         });
   
         dispatch(setNotes(notes));
+      });
+    };
+  };
+
+  export const setNotesCategorie = (notes) => ({
+    type: actionTypes.setNotesCategorie,
+    notes
+  });
+  
+  export const startSetNotesCategorie = () => {
+    return (dispatch, getState) => {
+      const uid = getState().auth
+
+      // return firebase.database().ref('notes').once('value').then((snapshot) => {
+        return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+
+        
+        const notes = [];
+  
+        snapshot.forEach((childSnapshot) => {
+          notes.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+        });
+  
+        dispatch(setNotesCategorie(notes));
       });
     };
   };
@@ -194,3 +220,10 @@ export const setNotes = (notes) => ({
       return firebase.auth().signOut();
     };
   }; 
+
+export const setCategorie = (categorie) => {
+  return {
+    type: actionTypes.setCurrentCategorie, 
+    categorie 
+  }
+}
