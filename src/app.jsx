@@ -7,9 +7,9 @@ import AppRouter from './router/AppRouter';
 const App = () => (
     <div>
         <AppRouter />
-        {/* <UploadDoc />
+         <UploadDoc />
 
-        <NoteList/>  */}
+        {/* <NoteList/>  */}
     </div>
 )
 

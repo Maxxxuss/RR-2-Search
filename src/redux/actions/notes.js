@@ -13,14 +13,16 @@ export const addNote = (note) => ({
        ...noteFactory(note),
   });
 
-export const startAddFile = (fileUrl = {} ) => {
-  return (dispatch) => {
+export const startAddFile = (fileUrl = {}, ) => {
+  
+  return (dispatch,getState) => {
+    const uid = getState().auth
       const note ={
           timestamp: firebase.database.ServerValue.TIMESTAMP,
           image: fileUrl,
       }     
     
-      return firebase.database().ref('notes').push(note).then((ref)=>{
+      return firebase.database().ref(`users/${uid}/notes`).push(note).then((ref)=>{
       dispatch(addNote({
           id: ref.key,
           ...note 
@@ -33,7 +35,7 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
 
 
     return (dispatch, getState) => {
-      const uid = getState().auth.uid
+      const uid = getState().auth
 
       const note = {
         buzwords: notesData.buzwords, 
@@ -44,7 +46,7 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
            
             
         }             
-       return firebase.database().ref('notes').push(note).then((ref)=>{
+       return firebase.database().ref(`users/${uid}/notes`).push(note).then((ref)=>{
         dispatch(addNote({
             id: ref.key,           
             ...note 
@@ -60,10 +62,10 @@ export const setNotes = (notes) => ({
   
   export const startSetNotes = () => {
     return (dispatch, getState) => {
-      // const uid = getState().auth.uid
+      const uid = getState().auth
 
-      return firebase.database().ref('notes').once('value').then((snapshot) => {
-        // return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+      // return firebase.database().ref('notes').once('value').then((snapshot) => {
+        return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
 
         
         const notes = [];
@@ -81,9 +83,10 @@ export const setNotes = (notes) => ({
   };
   
     export const startRemoveNotes = ({ id } = {}) => {
-        return (dispatch,) => {
+        return (dispatch,getState) => {
+          const uid = getState().auth
     
-          return firebase.database().ref(`notes/${id}`).remove().then(() => {
+          return firebase.database().ref(`users/${uid}/notes/${id}`).remove().then(() => {
     
           dispatch(({ 
             type:actionTypes.startRemoveNotes,
@@ -101,9 +104,11 @@ export const setNotes = (notes) => ({
     });
     
     export const startEditNotes = (id, updates) => {
-        return (dispatch) => {
+        return (dispatch, getState) => {
+          const uid = getState().auth
+
     
-        return firebase.database().ref(`notes/${id}`).update(updates).then(() => {
+        return firebase.database().ref(`users/${uid}/notes/${id}`).update(updates).then(() => {
               dispatch(editNotes(id, updates));
         });
       };
