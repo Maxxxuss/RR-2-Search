@@ -19,6 +19,7 @@ class MetaPad extends Component {
     content: "" ,
     notes: this.props.notes,
     trashData: true,
+    categorie: this.props.categorie
   
     
   }
@@ -29,7 +30,7 @@ class MetaPad extends Component {
     })),
   }
 
-  setActiveNote = note => {
+  setActiveNote = (note, categorie) => {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
     this.setState({content: note.content})
@@ -37,6 +38,7 @@ class MetaPad extends Component {
     this.setState({categorie: note.categorie})
 
     console.log(this.state.activeNote)
+    console.log(this.state.categorie)
 
   };
 
@@ -75,8 +77,6 @@ class MetaPad extends Component {
         const content = e.target.value
         this.setState (()=> ({content}))
       }
-    
-
 
       onNoteEdit = (e) => {
         e.preventDefault()

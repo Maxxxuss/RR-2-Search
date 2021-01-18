@@ -36,6 +36,7 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
 
     return (dispatch, getState) => {
       const uid = getState().auth
+      const categorie = getState().categorie
 
       const note = {
         buzwords: notesData.buzwords, 
@@ -45,8 +46,9 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
         fileUrl: fileUrl,
         categorie: notesData.categorie,
         }             
-       return firebase.database().ref(`users/${uid}/notes`).push(note).then((ref)=>{
-        dispatch(addNote({
+       return firebase.database().ref(`users/${uid}/notes`).child(categorie.id).push(note).then((ref)=>{
+        
+          dispatch(addNote({
             id: ref.key,           
             ...note 
             }))        
@@ -223,7 +225,7 @@ export const setNotes = (notes) => ({
 
 export const setCategorie = (categorie) => {
   return {
-    type: actionTypes.setCurrentCategorie, 
+    type: actionTypes.setCategorie, 
     categorie 
   }
 }

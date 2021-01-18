@@ -11,7 +11,8 @@ export default class AddDataForm extends React.Component {
       titel: "",
       description:"",
       buzwords:"", 
-      categorie: ""
+      categorie: "",
+      // categorie: this.props.categorie,
 
     };
   }

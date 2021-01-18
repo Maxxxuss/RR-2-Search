@@ -88,7 +88,7 @@ class Categories extends React.Component {
   
     changeCategorie = categorie => {
       this.setActiveCategorie(categorie);
-      this.props.setCurrentCategorie(categorie);
+      this.props.setCategorie(categorie);
     };
   
     setActiveCategorie = categorie => {

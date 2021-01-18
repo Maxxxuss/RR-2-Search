@@ -1,10 +1,12 @@
 import {connect}  from 'react-redux';
 import MetaPad from '../components/MetaPad/MetaPad'
 import {getAllNotes} from '../redux/selectors/notes'
+import {getAllCategories} from '../redux/selectors/categorie'
 import {startRemoveNotes, startEditNotes, startAddNotes, startAddTrash, startSetTrash} from '../redux/actions/notes'
 
 const mapStateToProps = state =>( {
     notes: getAllNotes(state),
+    // categorie: getAllCategories (state) 
 })
 
 const mapDispatchToProps = (dispatch) => ({

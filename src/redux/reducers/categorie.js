@@ -6,9 +6,7 @@ import createReducer from './create-reducer.js';
 
 
 
-const initialCategorieState = {
-    currentCategorie: null
-  };
+const initalState = [ ]
 
   const actionsMap = {
       [actionTypes.setCategorie]:(state, action) => (state, action.categorie )
@@ -26,4 +24,4 @@ const initialCategorieState = {
 //     }
 //   }
 
-  export default createReducer(initialCategorieState, actionsMap);
+  export default createReducer(initalState, actionsMap);
