@@ -5,6 +5,9 @@ import firebase from '../../firebase/firebase'
 import NotesSearch from '../Header/NotesSearch'
 import PdfView from '../../components/Docs/pdfView/pdfView'
 import AddDataForm from './AddDataForm.js';
+import TrashData from '../../container/trash'
+import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
+
 
 class MetaPad extends Component {
 
@@ -19,18 +22,17 @@ class MetaPad extends Component {
     content: "" ,
     notes: this.props.notes,
     trashData: true,
-    categorie: this.props.categorie
-  
-    
+    categorie: this.props.categorie, 
+    notesOnCategorie: "", 
   }
 
-  static propTypes = {
+  static propTypes = {  
     notes: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequired,
     })),
   }
 
-  setActiveNote = (note, categorie) => {
+  setActiveNote = (note) => {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
     this.setState({content: note.content})
@@ -39,31 +41,9 @@ class MetaPad extends Component {
 
     console.log(this.state.activeNote)
     console.log(this.state.categorie)
-
   };
 
-  displayNotes = ({notes = this.props.notes} ) => {
-    const trashData = this.state.trashData
-    if (trashData === true) {
-      console.log(notes)
-      this.displayLinkedNotes(notes)
-    } else {
-    }
-  }
- 
-  // displayLinkedNotes = (notes) => 
-    
-  // notes.map(note => (
-  //   <li
-  //     key={note.id} 
-  //     onClick={() => this.setActiveNote(note)}
-  //       > 
-  //        # {note.content}
-  //     </li>
-  //   ))
-
     displayLinkedNotes = (notes) => 
-    
     notes.map(note => (
       <li
         key={note.id} 
@@ -143,6 +123,9 @@ class MetaPad extends Component {
       const trashData = true
       this.setState({trashData})
     }
+
+
+    
     
     render (){
       const {notes, onAddNote} = this.props
@@ -157,13 +140,6 @@ class MetaPad extends Component {
           handleSearchChange={this.handleSearchChange}
           searchLoading={searchLoading}
         /> 
-        <div>
-          <button
-          onClick = {this.displayNotes}
-          >
-            Show-Trash
-          </button>
-        </div>
 
 
         <div>

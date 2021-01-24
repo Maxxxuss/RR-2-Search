@@ -21,9 +21,7 @@ const actionsMap = {
         };
     })),
     [actionTypes.startRemoveNotes]: (state, action) => (state.filter(({ id }) => id !== action.id)),
-
-
-    
+    [actionTypes.setNotesOnCategorie]: (state, action) => (state, action.notes),
 
 }
 

@@ -1,7 +1,7 @@
 import React from "react"
 import firebase from '../../firebase/firebase'
 import { connect } from "react-redux";
-import {setCategorie} from '../../redux/actions/notes'
+import {setCategorie, setNotesOnCategorie} from '../../redux/actions/notes'
 
 import { Menu, Icon, Modal, Form, Input, Button } from "semantic-ui-react";
 
@@ -56,10 +56,6 @@ class Categories extends React.Component {
         id: key,
         name: categorieName,
         details: categorieDetails,
-        // createdBy: {
-        //   name: user.displayName,
-        //   avatar: user.photoURL
-        // }
       };
   
       categoriesRef
@@ -89,6 +85,9 @@ class Categories extends React.Component {
     changeCategorie = categorie => {
       this.setActiveCategorie(categorie);
       this.props.setCategorie(categorie);
+      this.props.setNotesOnCategorie(categorie)
+
+      console.log("Categorie.id lautet: " + categorie.id)
     };
   
     setActiveCategorie = categorie => {
@@ -172,6 +171,6 @@ class Categories extends React.Component {
   
   export default connect(
     null,
-    { setCategorie }
+    { setCategorie, setNotesOnCategorie }
   )(Categories);
   

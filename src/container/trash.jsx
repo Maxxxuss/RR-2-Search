@@ -1,10 +1,8 @@
 import {connect}  from 'react-redux';
-import MetaPad from '../components/MetaPad/MetaPad'
+import TrashDate from '../components/MetaPad/TrashData'
 import {getAllNotes} from '../redux/selectors/notes'
 import {getAllCategories} from '../redux/selectors/categorie'
 import {startRemoveNotes, startEditNotes, startAddNotes, startAddTrash, startSetTrash, setNotesOnCategorie} from '../redux/actions/notes'
-
-
 
 const mapStateToProps = state =>( {
     notes: getAllNotes(state),
@@ -24,4 +22,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(MetaPad)
+)(TrashDate)

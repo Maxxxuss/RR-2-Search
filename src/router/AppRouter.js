@@ -11,6 +11,7 @@ import PublicRoute from './PublicRoute';
 import {createBrowserHistory} from 'history'
 import Notelist from  '../container/notelist'
 import TPage from '../components/tPage';
+import TrashData from '../container/trash'
 
 // let history = createBrowserHistory()
 
@@ -22,6 +23,8 @@ const AppRouter = () => (
       <Switch>
         <PublicRoute path="/" component={LoginPage} exact={true} />
         <PublicRoute path="/metapad" component={Notelist} />
+        <PublicRoute path="/trash" component={TrashData} />
+
         {/* <PrivateRoute path="/create" component={AddExpensePage} /> */}
         {/* <PrivateRoute path="/edit/:id" component={EditExpensePage} /> */}
         <Route component={NotFoundPage} />

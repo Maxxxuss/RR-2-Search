@@ -17,12 +17,14 @@ export const startAddFile = (fileUrl = {}, ) => {
   
   return (dispatch,getState) => {
     const uid = getState().auth
+    const categorie = getState().categorie.id
+
       const note ={
           timestamp: firebase.database.ServerValue.TIMESTAMP,
           image: fileUrl,
       }     
     
-      return firebase.database().ref(`users/${uid}/notes`).push(note).then((ref)=>{
+      return firebase.database().ref(`users/${uid}/notes/${categorie}`).push(note).then((ref)=>{
       dispatch(addNote({
           id: ref.key,
           ...note 
@@ -32,11 +34,9 @@ export const startAddFile = (fileUrl = {}, ) => {
 }
 
 export const startAddNotes = (notesData = {}, fileUrl = {}) => {
-
-
     return (dispatch, getState) => {
       const uid = getState().auth
-      const categorie = getState().categorie
+      const categorie = getState().categorie.id
 
       const note = {
         buzwords: notesData.buzwords, 
@@ -46,7 +46,7 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
         fileUrl: fileUrl,
         categorie: notesData.categorie,
         }             
-       return firebase.database().ref(`users/${uid}/notes`).child(categorie.id).push(note).then((ref)=>{
+       return firebase.database().ref(`users/${uid}/notes`).child(categorie).push(note).then((ref)=>{
         
           dispatch(addNote({
             id: ref.key,           
@@ -64,10 +64,10 @@ export const setNotes = (notes) => ({
   export const startSetNotes = () => {
     return (dispatch, getState) => {
       const uid = getState().auth
+      const categorie = getState().categorie.id
 
-      // return firebase.database().ref('notes').once('value').then((snapshot) => {
-        return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
-
+        // return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+        return firebase.database().ref(`users/${uid}/notes/${categorie}`).once('value').then((snapshot) => {
         
         const notes = [];
   
@@ -104,7 +104,6 @@ export const setNotes = (notes) => ({
             ...childSnapshot.val()
           });
         });
-  
         dispatch(setNotesCategorie(notes));
       });
     };
@@ -113,8 +112,9 @@ export const setNotes = (notes) => ({
     export const startRemoveNotes = ({ id } = {}) => {
         return (dispatch,getState) => {
           const uid = getState().auth
-    
-          return firebase.database().ref(`users/${uid}/notes/${id}`).remove().then(() => {
+          const categorie = getState().categorie.id
+
+          return firebase.database().ref(`users/${uid}/notes/${categorie}/${id}`).remove().then(() => {
     
           dispatch(({ 
             type:actionTypes.startRemoveNotes,
@@ -134,9 +134,11 @@ export const setNotes = (notes) => ({
     export const startEditNotes = (id, updates) => {
         return (dispatch, getState) => {
           const uid = getState().auth
+          const categorie = getState().categorie.id
+
 
     
-        return firebase.database().ref(`users/${uid}/notes/${id}`).update(updates).then(() => {
+        return firebase.database().ref(`users/${uid}/notes/${categorie}/${id}`).update(updates).then(() => {
               dispatch(editNotes(id, updates));
         });
       };
@@ -223,9 +225,31 @@ export const setNotes = (notes) => ({
     };
   }; 
 
-export const setCategorie = (categorie) => {
+export const setCategorie = (categorie ) => {
   return {
     type: actionTypes.setCategorie, 
-    categorie 
+    categorie
   }
 }
+
+
+export const setNotesOnCategorie  = () => {
+  return (dispatch, getState) => {
+    const uid = getState().auth
+    const categorie = getState().categorie.id 
+
+      return firebase.database().ref(`users/${uid}/notes/${categorie}`).once('value').then((snapshot) => {
+      const notes = [];
+
+      snapshot.forEach((childSnapshot) => {
+        notes.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+
+      dispatch(setNotes(notes));
+      // dispatch(setCategorie(categorie))
+    });
+  };
+};

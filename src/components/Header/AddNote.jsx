@@ -11,11 +11,7 @@ class AddNote extends Component {
             content: props.note ? props.note.content : '',
         }
     }
-    // handleChange =(e) => {
-    //     const {onAddNote} = this.props
-    //     const content = e.target.value
-    //     return onAddNote(content)
-    // }
+
     handelAddNote = (e, note) => {
         this.props.onAddNote(this.state.content)
         const content = e.target.value
@@ -30,7 +26,6 @@ class AddNote extends Component {
           return (
             <div> 
                 <textarea
-                // onChange={this.handleChange}
                 onChange={e => this.updateContent(e.target.value)}
                 value={this.state.content}
                 />
