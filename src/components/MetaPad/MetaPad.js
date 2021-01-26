@@ -114,7 +114,6 @@ class MetaPad extends Component {
     };
      
     handelRemove = () => {
-      const trashData = { trashData : this.state.activeNote}    
         this.props.startAddTrash ( this.state.activeNote)
         this.props.startRemoveNotes ({id: this.state.activeNote.id})
     }

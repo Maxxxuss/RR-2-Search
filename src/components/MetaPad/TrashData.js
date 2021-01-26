@@ -15,7 +15,6 @@ class TrashDate extends React.Component  {
         categorie:"",
         notes: this.props.notes, 
         searchResults: [],
-
     }
 
 
@@ -36,13 +35,10 @@ class TrashDate extends React.Component  {
       key={note.id} 
       onClick={() => this.setActiveNote(note)}
         > 
-         # {note.content}
+         # {note.trashData.content}
       </li>
     ))
 
-    state = {
-        notes : ""
-    }
 
     render () {
         const {notes} = this.props

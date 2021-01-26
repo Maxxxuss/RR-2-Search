@@ -2,7 +2,7 @@ import {connect}  from 'react-redux';
 import TrashDate from '../components/MetaPad/TrashData'
 import {getAllNotes} from '../redux/selectors/notes'
 import {getAllCategories} from '../redux/selectors/categorie'
-import {startRemoveNotes, startEditNotes, startAddNotes, startAddTrash, startSetTrash, setNotesOnCategorie} from '../redux/actions/notes'
+import {startRemoveNotes, startEditNotes, startAddNotes, startAddTrash, startSetTrash, setNotesOnCategorie, startShowTrashNotes} from '../redux/actions/notes'
 
 const mapStateToProps = state =>( {
     notes: getAllNotes(state),
@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
     startAddTrash: (id, trashData) => dispatch(startAddTrash(id, trashData)),
     startSetTrash: () => dispatch(startSetTrash()),
     setNotesOnCategorie: (notes) => dispatch(setNotesOnCategorie(notes)),
+    startShowTrashNotes: (notes) => dispatch(startShowTrashNotes(notes))
 
 });
 

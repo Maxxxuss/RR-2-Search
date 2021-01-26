@@ -8,12 +8,10 @@ export const notes = {
     startSetLogin: 'notes/startSetLogin',
     // setNotesCategorie : 'notes/setNotesCategorie',
     setCategorie: 'notes/setCategorie',
-    setNotesOnCategorie: 'notes/setNotesOnCategorie'
+    setNotesOnCategorie: 'notes/setNotesOnCategorie',
+    addTrash:'notes/addTrash',
+    startRemoveNotes: 'notes/startRemoveNotes',
+    setTrashNotes: 'notes/setTrashNotes',
+    startShowTrashNotes: 'notes/startShowTrashNotes'
+
 };
-
-export const trash = {
-    addTrash:'trash/addTrash',
-    setTrash: 'trash/setTrash',
-    startRemoveNotes: 'trash/startRemoveNotes',
-
-}

@@ -6,14 +6,20 @@ import {history} from '../../router/AppRouter'
 class Header extends React.Component {
 
     state ={
+        notes: this.props.notes
+    }
 
+    getTrash = () => {
+        this.props.startShowTrashNotes(this.props.notes)   
 
     }
 
-    sideTrash=(path) => {
-        history.push(path)
-  
-        window.location.reload(false);
+
+    sideTrash=() => {
+        history.push('/trash')
+    this.props.startShowTrashNotes()    
+    window.location.reload(false);
+
   
       }
 
@@ -31,7 +37,10 @@ class Header extends React.Component {
 
                         <button
 
-                        onClick = {() => this.sideTrash('/trash')}
+                        // onClick = {() => this.sideTrash('/trash')}
+                        // onClick = {() => this.sideTrash('/trash')}
+                        onClick = {this.sideTrash}
+
                         >
                             Show-Trash
                         </button>
@@ -39,12 +48,7 @@ class Header extends React.Component {
 
 
             </div>
-        )
-            
-
-            
-                        
-            
+        )  
         
     }
 }

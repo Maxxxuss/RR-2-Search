@@ -109,10 +109,11 @@ export const setNotes = (notes) => ({
     };
   };
   
-    export const startRemoveNotes = ({ id } = {}) => {
+    export const startRemoveNotes = ({id} = {}) => {
         return (dispatch,getState) => {
           const uid = getState().auth
           const categorie = getState().categorie.id
+          // const id = getState().notes.id
 
           return firebase.database().ref(`users/${uid}/notes/${categorie}/${id}`).remove().then(() => {
     
@@ -124,6 +125,34 @@ export const setNotes = (notes) => ({
         });
       };
     };
+
+    export const setTrashNotes = (notes) => ({
+      type: actionTypes.setTrashNotes,
+      notes
+    });
+    
+    export const startShowTrashNotes = () => {
+      return (dispatch, getState) => {
+        const uid = getState().auth
+  
+          // return firebase.database().ref(`users/${uid}/notes`).once('value').then((snapshot) => {
+          return firebase.database().ref(`users/${uid}/trash/`).once('value').then((snapshot) => {
+          
+          const notes = [];
+    
+          snapshot.forEach((childSnapshot) => {
+            notes.push({
+              id: childSnapshot.key,
+              ...childSnapshot.val()
+            });
+          });
+    
+          dispatch(setTrashNotes(notes));
+        });
+      };
+    };
+  
+
 
     export const editNotes = (id, updates) => ({
       type: actionTypes.editNotes,
@@ -149,13 +178,14 @@ export const setNotes = (notes) => ({
          ...noteFactory(note),
     });
   
-    export const startAddTrash = (trashData = {}) => {
-      return (dispatch) => {
+    export const startAddTrash = (trashData = {}, id) => {
+      return (dispatch, getState) => {
           const trash = {
         trashData, 
         trashTimeStamp: firebase.database.ServerValue.TIMESTAMP,                                 
           }      
-         return firebase.database().ref('trash').push(trash).then(()=>{
+          const uid = getState().auth
+         return firebase.database().ref(`users/${uid}/trash/`).push(trash).then(()=>{
           dispatch(({
             type: actionTypes.addTrash,
             trash
