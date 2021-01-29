@@ -15,18 +15,4 @@ export const getAllNotes = createSelector(
     }))
 );
 
-// export const getTrash = state => state.notes;
-
-// export const getAllTrash = createSelector(
-//     getNotes,
-//     trashDatas => notes.map(note => ({
-//         id: note.id,
-//         content: note.trashData.content ? note.trashData.content : "",
-//         fileUrl: note.trashData.fileUrl ? note.trashData.fileUrl : "",
-//         image: note.trashData.image ? note.trashData.image : "",
-//         categorie: note.trashData.categorie ? note.trashData.categorie : "",
-//         trashData: note.trashData.trashData ? note.trashData.trashData : "",
-
-//     }))
-// );
 

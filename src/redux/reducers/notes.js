@@ -20,9 +20,9 @@ const actionsMap = {
           return note;
         };
     })),
-    [actionTypes.startRemoveNotes]: (state, action) => (state.filter(({ id }) => id !== action.id)),
+    // [actionTypes.startAddTrash]: (state, action) => (state.filter(({ id }) => id !== action.id)),
     [actionTypes.setNotesOnCategorie]: (state, action) => (state, action.notes),
-    [actionTypes.setTrashNotes]: (state, action) => (state, action.notes),
+    [actionTypes.startAddNoteToTrash]: (state, action) => (state.filter(({id} ) => id !== action.id)),
 
 }
 

@@ -1,22 +1,31 @@
-// import firebase from '../../firebase/firebase';
 
-// export const login = (uid) => ({
-//   type: 'LOGIN',
-//   uid
-// });
+import { notes as actionTypes } from './action-types.js';
+import firebase from '../../firebase/firebase'
 
-// export const firstStartLogin = () => {
-//   return () => {
-//     return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
-//   };
-// };
+export const login = (uid) => ({
+    type: actionTypes.login,
+    uid
+  });
 
-// export const logout = () => ({
-//   type: 'LOGOUT'
-// });
+  export const startSetLogin = (uid) => 
 
-// export const startLogout = () => {
-//   return () => {
-//     return firebase.auth().signOut();
-//   };
-// }; 
+  ({  type: actionTypes.login,
+    uid})
+
+
+  
+  export const firstStartLogin = () => {
+    return () => {
+      return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    };
+  };
+  
+  export const logout = () => ({
+    type: actionTypes.logout
+  });
+  
+  export const startLogout = () => {
+    return () => {
+      return firebase.auth().signOut();
+    };
+  }; 

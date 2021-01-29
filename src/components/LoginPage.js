@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { firstStartLogin } from '../redux/actions/notes';
+import { firstStartLogin } from '../redux/actions/auth';
 
 export const LoginPage = ({ firstStartLogin }) => (
   <div>

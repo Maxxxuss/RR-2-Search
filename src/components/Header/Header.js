@@ -9,16 +9,11 @@ class Header extends React.Component {
         notes: this.props.notes
     }
 
-    getTrash = () => {
-        this.props.startShowTrashNotes(this.props.notes)   
-
-    }
-
 
     sideTrash=() => {
         history.push('/trash')
     this.props.startShowTrashNotes()    
-    window.location.reload(false);
+    // window.location.reload(false);
 
   
       }
@@ -45,11 +40,8 @@ class Header extends React.Component {
                             Show-Trash
                         </button>
                 </h3>
-
-
             </div>
         )  
-        
     }
 }
 

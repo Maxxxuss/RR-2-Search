@@ -5,7 +5,9 @@ import App from './app';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import firebase from './firebase/firebase'
-import { startSetNotes, login, logout, startSetLogin, startSetNotesCategorie } from './redux/actions/notes';
+import { startSetNotes } from './redux/actions/notes';
+import {logout, startSetLogin } from './redux/actions/auth';
+
 import {history} from './router/AppRouter'
 
 import "semantic-ui-css/semantic.min.css";

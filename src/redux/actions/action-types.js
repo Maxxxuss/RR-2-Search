@@ -6,12 +6,17 @@ export const notes = {
     login: 'notes/login',
     logout: 'notes/logout',
     startSetLogin: 'notes/startSetLogin',
-    // setNotesCategorie : 'notes/setNotesCategorie',
     setCategorie: 'notes/setCategorie',
     setNotesOnCategorie: 'notes/setNotesOnCategorie',
-    addTrash:'notes/addTrash',
-    startRemoveNotes: 'notes/startRemoveNotes',
-    setTrashNotes: 'notes/setTrashNotes',
-    startShowTrashNotes: 'notes/startShowTrashNotes'
+    startAddNoteToTrash: 'notes/startAddNoteToTrash'
+};
+
+
+
+export const trash = {
+    startAddTrash:'trash/startAddTrash',
+    startRemoveNotes: 'trash/startRemoveNotes',
+    setTrashNotes: 'trash/setTrashNotes',
+    startShowTrashNotes: 'trash/startShowTrashNotes'
 
 };

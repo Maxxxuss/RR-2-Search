@@ -45,14 +45,10 @@ class TrashDate extends React.Component  {
 
         return ( 
             <div>
-
                 <h1>
                 Trash Data
                 </h1>
-
                 {this.displayLinkedNotes(notes)}
-            
-                
 
             </div>   
             )

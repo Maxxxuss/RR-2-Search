@@ -21,7 +21,7 @@ class MetaPad extends Component {
     file: "",
     content: "" ,
     notes: this.props.notes,
-    trashData: true,
+    trashData: "",
     categorie: this.props.categorie, 
     notesOnCategorie: "", 
   }
@@ -114,13 +114,8 @@ class MetaPad extends Component {
     };
      
     handelRemove = () => {
-        this.props.startAddTrash ( this.state.activeNote)
-        this.props.startRemoveNotes ({id: this.state.activeNote.id})
-    }
-
-    showTrash = () => {
-      const trashData = true
-      this.setState({trashData})
+        this.props.startAddNoteToTrash ( this.state.activeNote, {id: this.state.activeNote.id})
+        // this.setState (this.props.notes)
     }
 
 
