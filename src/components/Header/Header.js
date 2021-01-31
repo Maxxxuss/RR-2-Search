@@ -10,12 +10,10 @@ class Header extends React.Component {
     }
 
 
-    sideTrash=() => {
-        history.push('/trash')
+    sideTrash=(path) => {
+        history.push(path)
     this.props.startShowTrashNotes()    
-    // window.location.reload(false);
-
-  
+    window.location.reload(false)
       }
 
     render() {
@@ -32,10 +30,7 @@ class Header extends React.Component {
 
                         <button
 
-                        // onClick = {() => this.sideTrash('/trash')}
-                        // onClick = {() => this.sideTrash('/trash')}
-                        onClick = {this.sideTrash}
-
+                        onClick = {()=> this.sideTrash('/trash')}
                         >
                             Show-Trash
                         </button>

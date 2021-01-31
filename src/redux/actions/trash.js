@@ -30,31 +30,62 @@ import firebase from '../../firebase/firebase'
     }
 }
 
-export const setTrashNotes = (trashs) => ({
+export const setTrashNotes = (trash) => ({
     type: actionTypes.setTrashNotes,
-    trashs
+    trash
   });
   
   export const startShowTrashNotes = () => {
     return (dispatch, getState) => {
       const uid = getState().auth
 
-        // return firebase.database().ref(`users/${uid}/trashs`).once('value').then((snapshot) => {
-        return firebase.database().ref(`users/${uid}/trash/`).once('value').then((snapshot) => {
+        return firebase.database().ref(`users/${uid}/trash`).once('value').then((snapshot) => {
         
-        const trashs = [];
+        const trash = [];
   
         snapshot.forEach((childSnapshot) => {
-          trashs.push({
+          trash.push({
             id: childSnapshot.key,
             ...childSnapshot.val()
           });
         });
   
-        dispatch(setTrashNotes(trashs));
+        dispatch(setTrashNotes(trash));
       });
     };
 }
+
+
+export const startRestoreNote = (trashData, {id} ={}) => {
+  return (dispatch, getState) => {
+    const categorie = trashData.trashCategorie
+    const id = trashData.trashId
+
+      const notes = {
+        content: trashData.trashContent,
+        fileUrl: trashData.trashFileUrl,
+        categorie: trashData.trashCategorie,
+        image: trashData.trashImage
+                     
+      }      
+      const uid = getState().auth
+
+     return firebase.database().ref(`users/${uid}/notes/${categorie}`).push(notes).then(()=>{
+          return firebase.database().ref(`users/${uid}/trash/${id}`).remove().then(() => {
+
+              dispatch(({ 
+                type:actionTypes.startRestoreNote, 
+                id
+                
+               }));
+              console.log(trashData)
+              console.log("categproe trash Note:" +id)
+            });
+      })               
+  }
+}
+
+
 
 
 

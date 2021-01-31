@@ -1,5 +1,5 @@
 import React from "react"
-import { notes } from "../../redux/actions/action-types";
+import { notes, trash } from "../../redux/actions/action-types";
 import MetaPad from './MetaPad'
 
 
@@ -7,50 +7,66 @@ import MetaPad from './MetaPad'
 class TrashDate extends React.Component  {
 
     state = {
-        searchTerm: "",
-        activeNote:"", 
-        file:"",
-        content:"",
-        selectedNote:"",
-        categorie:"",
-        notes: this.props.notes, 
-        searchResults: [],
+        activeTrashNote:"", 
+        trash:this.props.trash,
     }
 
 
-  setActiveNote = (note) => {
-    this.setState({ activeNote: note });
-    this.setState({ file:  note.image })
-    this.setState({content: note.content})
-    this.setState({selectedNote: note})
-    this.setState({categorie: note.categorie})
-
-    console.log(this.state.activeNote)
-    console.log(this.state.categorie)
+  setActiveTrashNote = (trashData) => {
+    this.setState({ activeTrashNote: trashData });
+    console.log(this.state.activeTrashNote)
   };
 
-  displayLinkedNotes = (notes) => 
-  notes.map(note => (
+  displayLinkedNotes = (trash) => 
+  trash.map(trashData => (
     <li
-      key={note.id} 
-      onClick={() => this.setActiveNote(note)}
+      key={trashData.trashId} 
+      onClick={() => this.setActiveTrashNote(trashData)}
         > 
-         # {note.trashData.content}
+         # {trashData.trashContent}
       </li>
     ))
 
+    deleteNotePermanetly = () => {
+
+    }
+
+    restoreNote = (activeTrashNote)=> { 
+      this.props.startRestoreNote(activeTrashNote)
+      console.log("active Trash note Id:" +this.state.activeTrashNote.trashId)
+
+    }
 
     render () {
-        const {notes} = this.props
+        const {trash} = this.props
+        const {activeTrashNote} = this.state
 
         return ( 
+
+          <div>
+
+            <div>
+             {/* <button
+             > 
+               Delete All 
+              </button>    */}
+
+              <button 
+              onClick ={() => this.restoreNote(activeTrashNote)}
+              >
+                Restore Note
+              </button>
+            </div>
             <div>
                 <h1>
                 Trash Data
                 </h1>
-                {this.displayLinkedNotes(notes)}
+                {this.displayLinkedNotes(trash)}
+            </div>  
 
-            </div>   
+
+
+          </div>
             )
     }
 }

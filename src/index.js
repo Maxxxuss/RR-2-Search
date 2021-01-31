@@ -8,9 +8,11 @@ import firebase from './firebase/firebase'
 import { startSetNotes } from './redux/actions/notes';
 import {logout, startSetLogin } from './redux/actions/auth';
 
+
 import {history} from './router/AppRouter'
 
 import "semantic-ui-css/semantic.min.css";
+import { startShowTrashNotes } from './redux/actions/trash';
 
 
 
@@ -18,7 +20,8 @@ import "semantic-ui-css/semantic.min.css";
 // weiter 4:30
 
 const renderApp = () => {
-store.dispatch(startSetNotes()).then(()=>{
+  store.dispatch(startSetNotes())
+store.dispatch(startShowTrashNotes()).then(()=>{
   ReactDOM.render(
     <Provider store={store}>
       <App />

@@ -7,6 +7,7 @@ const initalState = [];
 
 const actionsMap = {
     [actionTypes.setNotes]: (state, action) => (state, action.notes),
+
     [actionTypes.addNote]: (state, { type, ...newNote }) => state
         .concat([newNote]),
     [actionTypes.editNotes] : (state, action) => (

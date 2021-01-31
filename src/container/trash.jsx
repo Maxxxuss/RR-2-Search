@@ -1,15 +1,16 @@
 import {connect}  from 'react-redux';
 import TrashDate from '../components/MetaPad/TrashData'
 import {getAllTrash} from '../redux/selectors/trash'
-import {startShowTrashNotes} from '../redux/actions/trash'
+import {startShowTrashNotes, startRestoreNote} from '../redux/actions/trash'
 
 const mapStateToProps = state =>( {
     trash: getAllTrash(state),
-    // categorie: getAllCategories (state) 
+
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    startShowTrashNotes: (trash) => dispatch(startShowTrashNotes(trash))
+    startShowTrashNotes: (trash) => dispatch(startShowTrashNotes(trash)),
+    startRestoreNote: (trashData) => dispatch(startRestoreNote(trashData))
 
 });
 

@@ -32,6 +32,7 @@ export const startSetNotes = () => {
 
       dispatch(setNotes(notes));
     });
+    
   };
 };
 
@@ -102,13 +103,16 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
   };
 
   export const startAddNoteToTrash = ( trashData={}, {id}={}) => {
+
     return (dispatch, getState) => {
+      const categorie = getState().categorie.id
+
         const notes = {
       trashData, 
-      trashTimeStamp: firebase.database.ServerValue.TIMESTAMP,                                 
+      trashTimeStamp: firebase.database.ServerValue.TIMESTAMP,  
+      categorie: categorie                               
         }      
         const uid = getState().auth
-        const categorie = getState().categorie.id
 
        return firebase.database().ref(`users/${uid}/trash/`).push(notes).then(()=>{
             return firebase.database().ref(`users/${uid}/notes/${categorie}/${id}`).remove().then(() => {

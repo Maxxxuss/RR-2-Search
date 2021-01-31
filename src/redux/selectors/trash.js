@@ -10,8 +10,8 @@ export const getAllTrash = createSelector(
         trashContent: trash.trashData.content ? trash.trashData.content : "",
         trashFileUrl: trash.trashData.fileUrl ? trash.trashData.fileUrl : "",
         trashImage: trash.trashData.image ? trash.trashData.image : "",
-        trashCategorie: trash.trashData.categorie ? trash.trashData.categorie : "",
+        trashCategorie: trash.categorie ? trash.categorie : "",
 
     }))
-);
+);                      
 
