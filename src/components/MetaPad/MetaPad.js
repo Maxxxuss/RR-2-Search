@@ -5,7 +5,7 @@ import firebase from '../../firebase/firebase'
 import NotesSearch from '../Header/NotesSearch'
 import PdfView from '../../components/Docs/pdfView/pdfView'
 import AddDataForm from './AddDataForm.js';
-import TrashData from '../../container/trash'
+import DropDownCategorie from '../../container/dropDownCategorie'
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
 
 
@@ -146,7 +146,11 @@ class MetaPad extends Component {
           onClick = { this.onNoteEdit}
           >
             Änderung Übernehmen 
+      
           </button>
+          <div>
+              <DropDownCategorie/>
+            </div>
 
           </div> 
            <div>

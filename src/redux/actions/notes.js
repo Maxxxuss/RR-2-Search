@@ -8,6 +8,7 @@ const noteFactory = (note) => {
         };
 }
 
+
 export const setNotes = (notes) => ({
   type: actionTypes.setNotes,
   notes
@@ -128,7 +129,6 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
     }
 }
  
-
 export const setCategorie = (categorie ) => {
   return {
     type: actionTypes.setCategorie, 
@@ -143,6 +143,8 @@ export const setNotesOnCategorie  = () => {
     const categorie = getState().categorie.id 
 
       return firebase.database().ref(`users/${uid}/notes/${categorie}`).once('value').then((snapshot) => {
+        // return firebase.database().ref(`categorie`).once('value').then((snapshot) => {
+
       const notes = [];
 
       snapshot.forEach((childSnapshot) => {
@@ -153,7 +155,7 @@ export const setNotesOnCategorie  = () => {
       });
 
       dispatch(setNotes(notes));
-      // dispatch(setCategorie(categorie))
     });
   };
 };
+

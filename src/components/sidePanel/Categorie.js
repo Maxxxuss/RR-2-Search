@@ -10,7 +10,7 @@ class Categories extends React.Component {
     state = {
       activeCategorie: "",
       user: this.props.currentUser,
-      categories: [],
+      categorie: [],
       categorieName: "",
       categorieDetails: "",
       categoriesRef: firebase.database().ref("categories"),
@@ -30,7 +30,7 @@ class Categories extends React.Component {
       let loadedCategories = [];
       this.state.categoriesRef.on("child_added", snap => {
         loadedCategories.push(snap.val());
-        this.setState({ categories: loadedCategories }, () => this.setFirstCategorie());
+        this.setState({ categorie: loadedCategories }, () => this.setFirstCategorie());
       });
     };
   
@@ -39,8 +39,8 @@ class Categories extends React.Component {
     };
   
     setFirstCategorie = () => {
-      const firstCategorie = this.state.categories[0];
-      if (this.state.firstLoad && this.state.categories.length > 0) {
+      const firstCategorie = this.state.categorie[0];
+      if (this.state.firstLoad && this.state.categorie.length > 0) {
         this.props.setCategorie(firstCategorie);
         this.setActiveCategorie(firstCategorie);
       }
@@ -94,9 +94,9 @@ class Categories extends React.Component {
       this.setState({ activeCategorie: categorie.id });
     };
   
-    displayCategories = categories =>
-      categories.length > 0 &&
-      categories.map(categorie => (
+    displayCategories = categorie =>
+      categorie.length > 0 &&
+      categorie.map(categorie => (
         <Menu.Item
           key={categorie.id}
           onClick={() => this.changeCategorie(categorie)}
@@ -116,7 +116,7 @@ class Categories extends React.Component {
     closeModal = () => this.setState({ modal: false });
   
     render() {
-      const { categories, modal } = this.state;
+      const { categorie, modal } = this.state;
   
       return (
         <React.Fragment>
@@ -125,9 +125,9 @@ class Categories extends React.Component {
               <span>
                 <Icon name="exchange" /> CategorieS
               </span>{" "}
-              ({categories.length}) <Icon name="add" onClick={this.openModal} />
+              ({categorie.length}) <Icon name="add" onClick={this.openModal} />
             </Menu.Item>
-            {this.displayCategories(categories)}
+            {this.displayCategories(categorie)}
           </Menu.Menu>
   
           {/* Add Categorie Modal */}

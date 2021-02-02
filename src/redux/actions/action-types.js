@@ -9,6 +9,10 @@ export const notes = {
     setCategorie: 'notes/setCategorie',
     setNotesOnCategorie: 'notes/setNotesOnCategorie',
     startAddNoteToTrash: 'notes/startAddNoteToTrash',
+    setNotesOnCategorie: 'notes/setNotesOnCategorie',
+    setCategorie: 'notes/setCategorie',
+
+
 };
 
 
@@ -21,3 +25,10 @@ export const trash = {
     startRestoreNote: 'trash/startRestoreNote'
 
 };
+
+
+// export const categorie = {
+   
+//     setCategorie: 'notes/setCategorie',
+//     setNotesOnCategorie: 'notes/setNotesOnCategorie',
+// };

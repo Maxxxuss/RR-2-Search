@@ -10,15 +10,6 @@ const actionsMap = {
     [actionTypes.setTrashNotes]: (state, action) => (state, action.trash),
     [actionTypes.startRestoreNote]: (state, action) => (state.filter(({id} ) => id !== action.id)),
 
-
-
-
-    // [actionTypes.startRemoveNotes]: (state, action) => (state.filter(({ id }) => id !== action.id)),
-
-    // [actionTypes.setTrashNotes]: (state, action) => (state, action.trash),
-
-    // [actionTypes.setNotesOnCategorie]: (state, action) => (state, action.notes),
-
 }
 
 export default createReducer(initalState, actionsMap);
