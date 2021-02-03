@@ -1,52 +1,79 @@
 import React, {Component} from 'react';
 import Downshift from 'downshift'
 import {menuStyles, comboboxStyles} from '../../Styles/Categorie'
+import PropTypes from 'prop-types'
+import { categorie } from '../../redux/actions/action-types';
+
 
 
 
 class DropDownCategorie extends Component {
 
     state = {
-        // categorie: this.props.categorie
+      allCategories: this.props.allCategories,
+      categorieName: ""
+        }
+
+
+
+    showAllCategories = ( allCategories) =>{
+      console.log("Ausgabe der Kategorien: " + allCategories[1].name )
+
     }
 
-    showCategorie = () =>{
+    // setAllCategories = (allCategories) => 
+    //   allCategories.map(categorie => ( 
+    //   <li
+    //     key= {categorie.id}
+    //   >
+    //     * {categorie.name}
+    //   </li>
 
-    }
+    //   ))
 
+      setAllCategories = (allCategories) => {
 
+      // const cat = mymap.get(allCategories.name)
+      // console.log(cat)
+      console.log(allCategories)
 
+      }
+
+    
 
       
       render () {
 
-        const items = [
-            {value: 'apple'},
-            {value: 'pear'},
-            {value: 'orange'},
-            {value: 'grape'},
-            {value: 'banana'},
-          ]
+        const items = this.state.allCategories
+        // const items = (allCategories) => (
+        //   allCategories.map(categorie.name)
+        // )
+
+          const {allCategories} = this.state
 
         return (
 
             <div>
 
                 <button
-                onClick= {this.showCategorie}
+                onClick= {() => this.setAllCategories(allCategories)}
                 >
                     showCategorie
 
                 </button>
+
+                <div>
+                  {/* {this.setAllCategories(allCategories)} */}
+                </div>
       <div>
 
 
 
         <Downshift
           onChange={(selection) =>
-            alert(selection ? `You selected ${selection.value}` : 'Selection Cleared')
+            alert(selection ? `You selected ${selection.name}` : 'Selection Cleared')
           }
-          itemToString={(item) => (item ? item.value : '')}
+          itemToString={(item) => (item ? item.name : '')}
         >
           {({
             getInputProps,
@@ -68,11 +95,11 @@ class DropDownCategorie extends Component {
               <ul {...getMenuProps()} style={menuStyles}>
                 {isOpen &&
                   items
-                    .filter((item) => !inputValue || item.value.includes(inputValue))
+                    .filter((item) => !inputValue || item.name.includes(inputValue))
                     .map((item, index) => (
                       <li
                         {...getItemProps({
-                          key: `${item.value}${index}`,
+                          key: `${item.name}${index}`,
                           item,
                           index,
                           style: {
@@ -82,7 +109,7 @@ class DropDownCategorie extends Component {
                           },
                         })}
                       >
-                        {item.value}
+                        {item.name}
                       </li>
                     ))}
               </ul>

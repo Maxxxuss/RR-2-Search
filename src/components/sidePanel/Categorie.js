@@ -2,6 +2,7 @@ import React from "react"
 import firebase from '../../firebase/firebase'
 import { connect } from "react-redux";
 import {setCategorie, setNotesOnCategorie} from '../../redux/actions/notes'
+import {setAllCatetegories} from '../../redux/actions/categorie'
 
 import { Menu, Icon, Modal, Form, Input, Button } from "semantic-ui-react";
 

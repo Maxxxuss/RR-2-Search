@@ -3,6 +3,7 @@ import notes from './notes.js';
 import authReducer from './auth'
 import categorie from './categorie'
 import trash from './trash'
+import allCategories from './allCategories'
 
 
 export default combineReducers({
@@ -10,5 +11,8 @@ export default combineReducers({
    auth: authReducer,
    categorie,
    trash, 
+   allCategories
+   
+
    
 });

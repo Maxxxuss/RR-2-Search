@@ -11,6 +11,8 @@ export const notes = {
     startAddNoteToTrash: 'notes/startAddNoteToTrash',
     setNotesOnCategorie: 'notes/setNotesOnCategorie',
     setCategorie: 'notes/setCategorie',
+    getAllCategories: 'notes/getAllCategories',
+
 
 
 };
@@ -27,8 +29,8 @@ export const trash = {
 };
 
 
-// export const categorie = {
-   
-//     setCategorie: 'notes/setCategorie',
-//     setNotesOnCategorie: 'notes/setNotesOnCategorie',
-// };
+export const categorie = {
+    getAllCategories: 'categories/getAllCategories',
+    setAllCatetegories: 'categories/setAllCatetegories',
+
+};

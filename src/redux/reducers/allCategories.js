@@ -1,5 +1,5 @@
 import {
-    notes as actionTypes,
+    categorie as actionTypes,
 } from '../actions/action-types.js';
 import createReducer from './create-reducer.js';
 
@@ -9,9 +9,10 @@ import createReducer from './create-reducer.js';
 const initalState = []
 
   const actionsMap = {
-      [actionTypes.setCategorie]:(state, action) => (state, action.categorie ),
-      [actionTypes.setNotesOnCategorie]: (state, action) => (state, action.notes),
-      
+    [actionTypes.getAllCategories]: (state, action) => (state, action.allCategories),
+    [actionTypes.allCategories]: (state, action) => (state, action.allCategories),
+
+
 
   }
   

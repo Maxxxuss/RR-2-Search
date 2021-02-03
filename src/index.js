@@ -13,7 +13,7 @@ import {history} from './router/AppRouter'
 
 import "semantic-ui-css/semantic.min.css";
 import { startShowTrashNotes } from './redux/actions/trash';
-import { setCategorie } from './redux/actions/categorie';
+import { setAllCatetegories, setCategorie } from './redux/actions/categorie';
 
 
 
@@ -21,6 +21,7 @@ import { setCategorie } from './redux/actions/categorie';
 // weiter 4:30
 
 const renderApp = () => {
+  store.dispatch(setAllCatetegories())
   store.dispatch(startSetNotes())
 store.dispatch(startShowTrashNotes()).then(()=>{
   ReactDOM.render(

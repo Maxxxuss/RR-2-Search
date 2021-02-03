@@ -3,12 +3,12 @@ import {getAllNotes} from '../redux/selectors/notes'
 import DropDownCategorie from '../components/MetaPad/DropDownCategorie'
 import { startAddFile,  } from '../redux/actions/notes';
 import { startShowTrashNotes } from '../redux/actions/trash';
-import { getAllCategories } from '../redux/selectors/categorie';
+import {  getAllCategories } from '../redux/selectors/allCategories';
 
 
 
 const mapStateToProps = state =>( {
-    categorie: getAllCategories(state),
+    allCategories: getAllCategories(state),
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -18,6 +18,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
 )(DropDownCategorie);
