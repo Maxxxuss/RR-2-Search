@@ -80,12 +80,13 @@ export const getAllCategories = (allCategories) => {
       //remove Changed Categorie-Note
 
       //set Categorie Note 
-      // return firebase.database().ref(`users/${uid}/notes/${categorie}/${id}`).update({categorie: updates.catName}).then(()=>{
+      return firebase.database().ref(`users/${uid}/notes/${categorie}/${id}`).update({categorie: updates.catName}).then(()=>{
 
         //get updated Note
 
         // Push updatet Note to new Kat
-        return firebase.database().ref(`users/${uid}/notes/${updates.id}`).push(pusNote).then(()=>{
+        return firebase.database().ref(`users/${uid}/notes/${updates.id}`).push(pusNote).update({categorie: updates.catName}).then(()=>{
+          
 
 
         // delete updatete Note
@@ -103,6 +104,8 @@ export const getAllCategories = (allCategories) => {
             console.log("action ID" +id)
           });
     })    
+  })    
+
 
   };
 };
