@@ -6,11 +6,12 @@ export const getAllNotes = createSelector(
     getNotes,
     notes => notes.map(note => ({
         id: note.id,
+        categorie: note.categorie ? note.categorie : "",
         content: note.content ? note.content : "",
+        description: note.description ? note.description : "", 
+        timestamp: note.timestamp ? note.timestamp : "", 
         fileUrl: note.fileUrl ? note.fileUrl : "",
         image: note.image ? note.image : "",
-        categorie: note.categorie ? note.categorie : "",
-        trashData: note.trashData ? note.trashData : "",
 
     }))
 );

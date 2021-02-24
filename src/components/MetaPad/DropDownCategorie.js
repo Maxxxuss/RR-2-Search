@@ -3,126 +3,321 @@ import Downshift from 'downshift'
 import {menuStyles, comboboxStyles} from '../../Styles/Categorie'
 import PropTypes from 'prop-types'
 import { categorie } from '../../redux/actions/action-types';
-
-
+import { Placeholder } from 'semantic-ui-react';
+import {matchSorter} from 'match-sorter'
+// import { css } from 
+import styled from '@emotion/styled'
+import { css as emoCSS } from '@emotion/css'
+import { getAllCategories } from '../../redux/selectors/allCategories';
+import { contentType } from 'mime-types';
 
 
 class DropDownCategorie extends Component {
 
     state = {
       allCategories: this.props.allCategories,
-      categorieName: ""
+      catName: "",
+      actCategorie: "",
+      categorie: "",
+      activeNote: this.props.activeNote,
+      isOpen: "" ,
+      notes: this.props.notes
+
+        }
+        
+       getItems(filter) {
+         
+         const allItems = this.props.allCategories
+          return filter
+            ? matchSorter(allItems, filter, {
+                keys: ['catName'],
+              })
+            : allItems
         }
 
-
-
-    showAllCategories = ( allCategories) =>{
-      console.log("Ausgabe der Kategorien: " + allCategories[1].name )
-
-    }
-
-    // setAllCategories = (allCategories) => 
-    //   allCategories.map(categorie => ( 
-    //   <li
-    //     key= {categorie.id}
-    //   >
-    //     * {categorie.name}
-    //   </li>
-
-    //   ))
-
-      setAllCategories = (allCategories) => {
-
-      // const cat = mymap.get(allCategories.name)
-      // console.log(cat)
-      console.log(allCategories)
-
+      onContentChange = (e) => {
+        const categorie = e.target.value
+        this.setState (()=> ({categorie}))
+        const activeNote = this.props.activeNote
+        // console.log(categorie)
+        console.log(activeNote)
       }
 
-    
+      onNoteEdit = (itemToString) => {
+        //ItemToString umfasst auch die Categorie Id --> mit dieser die Note löschen und in richtige Kate verschieben 
+        // e.preventDefault()
+        const updates = itemToString
+        this.props.startEditNotesContent (this.props.activeNote, {updates})
+       // this.props.startEditNotesContent (this.props.activeNote.id, {categorie})
+        console.log("DropDown-ActiveNote-ID: " + this.props.activeNote.id)
+        console.log("DropDown-Categorie: " + JSON.stringify(updates))
+      }
 
       
       render () {
+        const {content} = this.state
+        const {activeNote} = this.props
 
-        const items = this.state.allCategories
-        // const items = (allCategories) => (
-        //   allCategories.map(categorie.name)
-        // )
-
-          const {allCategories} = this.state
+        const items = this.props.allCategories
+        // const Items = this.state.allCategories
 
         return (
+        <div
+        {...css({
+          display: 'flex',
+          flexDirection: 'column',
+          marginTop: 50,
+        })}
+        >
 
-            <div>
-
-                <button
-                onClick= {() => this.setAllCategories(allCategories)}
-                >
-                    showCategorie
-
-                </button>
-
-                <div>
-                  {/* {this.setAllCategories(allCategories)} */}
-                </div>
-      <div>
-
-
+          <div>
+            <button
+             onClick = { this.onNoteEdit}
+            >
+              Cat-Change
+            </button>
+          </div>
 
         <Downshift
-          onChange={(selection) =>
-            alert(selection ? `You selected ${selection.name}` : 'Selection Cleared')
+          // onChange={(selection) =>
+          //   alert(
+          //     selection
+          //       ? `You selected ${itemToString(selection)}`
+          //       : 'selection cleared',
+          //   )
+          // }
+
+          onChange={(itemToString)=>
+            {this.onNoteEdit(itemToString)}
+
           }
-          itemToString={(item) => (item ? item.name : '')}
+          
+          itemToString={itemToString}
         >
           {({
-            getInputProps,
-            getItemProps,
-            getMenuProps,
             getLabelProps,
+            getInputProps,
             getToggleButtonProps,
+            getMenuProps,
+            getItemProps,
+            isOpen,
+            clearSelection,
+            selectedItem,
             inputValue,
             highlightedIndex,
-            selectedItem,
-            isOpen,
           }) => (
-            <div style={comboboxStyles}>
-              <label {...getLabelProps()}>Enter a fruit:</label>
-              <input {...getInputProps()} />
-              <button {...getToggleButtonProps()} aria-label={'toggle menu'}>
-                &#8595;
-              </button>
-              <ul {...getMenuProps()} style={menuStyles}>
-                {isOpen &&
-                  items
-                    .filter((item) => !inputValue || item.name.includes(inputValue))
-                    .map((item, index) => (
-                      <li
-                        {...getItemProps({
-                          key: `${item.name}${index}`,
-                          item,
-                          index,
-                          style: {
-                            backgroundColor:
-                              highlightedIndex === index ? 'lightgray' : 'white',
-                            fontWeight: selectedItem === item ? 'bold' : 'normal',
-                          },
-                        })}
-                      >
-                        {item.name}
-                      </li>
-                    ))}
-              </ul>
+            <div {...css({width: 250, margin: 'auto'})}>
+              <Label {...getLabelProps()}>Select categorie</Label>
+              <div {...css({position: 'relative'})}>
+                <Input
+                  {...getInputProps({
+                    isOpen,
+                    placeholder: activeNote ? activeNote.categorie : 'Enter a catName',
+                    onChange: this.onContentChange
+                  }
+
+                  )}
+                />
+                {selectedItem ? (
+                  <ControllerButton
+                    onClick={clearSelection}
+                    aria-label="clear selection"
+                  >
+                    <XIcon />
+                  </ControllerButton>
+                ) : (
+                  <ControllerButton {...getToggleButtonProps()}>
+                    <ArrowIcon isOpen={isOpen} />
+                  </ControllerButton>
+                )}
+              </div>
+              <div {...css({position: 'relative'})}>
+                <BaseMenu {...getMenuProps(isOpen)}>
+                  {isOpen
+                    ? this.getItems(inputValue).map((item, index) => (
+                        <Item
+                          key={item.id}
+                          {...getItemProps({
+                            item,
+                            index,
+                            isActive: highlightedIndex === index,
+                            isSelected: selectedItem === item,
+                          })}
+                        >
+                          {itemToString(item)}
+                        </Item>
+                      ))
+                    : null}
+                </BaseMenu>
+              </div>
             </div>
           )}
         </Downshift>
-        </div>
-
-        </div>
-
+      </div>
       )
 
  }
 }
+
+
+const Label = styled('label')({
+  fontWeight: 'bold',
+  display: 'block',
+  marginBottom: 10,
+})
+
+
+
+const ControllerButton = styled('button')({
+  backgroundColor: 'transparent',
+  border: 'none',
+  position: 'absolute',
+  right: 0,
+  top: 0,
+  cursor: 'pointer',
+  width: 47,
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
+})
+const onAttention = '&:hover, &:focus'
+const Input = styled('input')(
+  {
+    width: '100%', // full width - icon width/2 - border
+    fontSize: 14,
+    wordWrap: 'break-word',
+    lineHeight: '1em',
+    outline: 0,
+    whiteSpace: 'normal',
+    minHeight: '2em',
+    background: '#fff',
+    display: 'inline-block',
+    padding: '1em 2em 1em 1em',
+    color: 'rgba(0,0,0,.87)',
+    boxShadow: 'none',
+    border: '1px solid rgba(34,36,38,.15)',
+    borderRadius: '.30rem',
+    transition: 'box-shadow .1s ease,width .1s ease',
+    [onAttention]: {
+      borderColor: '#96c8da',
+      boxShadow: '0 2px 3px 0 rgba(34,36,38,.15)',
+    },
+  },
+  ({isOpen}) =>
+    isOpen
+      ? {
+          borderBottomLeftRadius: '0',
+          borderBottomRightRadius: '0',
+          [onAttention]: {
+            boxShadow: 'none',
+          },
+        }
+      : null,
+)
+
+const Item = styled('li')(
+  {
+    position: 'relative',
+    cursor: 'pointer',
+    display: 'block',
+    border: 'none',
+    height: 'auto',
+    textAlign: 'left',
+    borderTop: 'none',
+    lineHeight: '1em',
+    color: 'rgba(0,0,0,.87)',
+    fontSize: '1rem',
+    textTransform: 'none',
+    fontWeight: '400',
+    boxShadow: 'none',
+    padding: '.8rem 1.1rem',
+    whiteSpace: 'normal',
+    wordWrap: 'normal',
+  },
+  ({isActive, isSelected}) => {
+    const styles = []
+    if (isActive) {
+      styles.push({
+        color: 'rgba(0,0,0,.95)',
+        background: 'rgba(0,0,0,.03)',
+      })
+    }
+    if (isSelected) {
+      styles.push({
+        color: 'rgba(0,0,0,.95)',
+        fontWeight: '700',
+      })
+    }
+    return styles
+  },
+)
+
+function ArrowIcon({isOpen}) {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      preserveAspectRatio="none"
+      width={16}
+      fill="transparent"
+      stroke="#979797"
+      strokeWidth="1.1px"
+      transform={isOpen ? 'rotate(180)' : undefined}
+    >
+      <path d="M1,6 L10,15 L19,6" />
+    </svg>
+  )
+}
+
+function XIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      preserveAspectRatio="none"
+      width={12}
+      fill="transparent"
+      stroke="#979797"
+      strokeWidth="1.1px"
+    >
+      <path d="M1,1 L19,19" />
+      <path d="M19,1 L1,19" />
+    </svg>
+  )
+}
+
+const css = (...args) => ({className: emoCSS(...args)})
+
+const itemToString = (i) => (i ? i.catName : '')
+
+const BaseMenu = styled('ul')(
+  {
+    padding: 0,
+    marginTop: 0,
+    position: 'absolute',
+    backgroundColor: 'white',
+    width: '100%',
+    maxHeight: '20rem',
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    outline: '0',
+    transition: 'opacity .1s ease',
+    borderRadius: '0 0 .28571429rem .28571429rem',
+    boxShadow: '0 2px 3px 0 rgba(34,36,38,.15)',
+    borderColor: '#96c8da',
+    borderTopWidth: '0',
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+    borderLeftWidth: 1,
+    borderStyle: 'solid',
+  },
+  ({isOpen}) => ({
+    border: isOpen ? null : 'none',
+  }),
+)
+
+const Menu = React.forwardRef((props, ref) => (
+  <BaseMenu innerRef={ref} {...props} />
+))
 
 export default DropDownCategorie

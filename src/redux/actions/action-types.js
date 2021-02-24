@@ -12,9 +12,6 @@ export const notes = {
     setNotesOnCategorie: 'notes/setNotesOnCategorie',
     setCategorie: 'notes/setCategorie',
     getAllCategories: 'notes/getAllCategories',
-
-
-
 };
 
 
@@ -32,5 +29,7 @@ export const trash = {
 export const categorie = {
     getAllCategories: 'categories/getAllCategories',
     setAllCatetegories: 'categories/setAllCatetegories',
+    editNotesContent: 'categories/editNotesContent',
+    startEditNotesContent: 'categories/startEditNotesContent'
 
 };

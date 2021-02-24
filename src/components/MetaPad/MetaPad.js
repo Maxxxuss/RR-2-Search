@@ -39,8 +39,7 @@ class MetaPad extends Component {
     this.setState({selectedNote: note})
     this.setState({categorie: note.categorie})
 
-    console.log(this.state.activeNote)
-    console.log(this.state.categorie)
+    console.log("MetaPad ActiveNote", this.state.activeNote)
   };
 
     displayLinkedNotes = (notes) => 
@@ -61,7 +60,7 @@ class MetaPad extends Component {
       onNoteEdit = (e) => {
         e.preventDefault()
         const content = this.state.content
-        this.props.startEditNotes (this.state.activeNote.id,{ content})
+        this.props.startEditNotes (this.state.activeNote.id, { content})
       }
 
 
@@ -80,6 +79,11 @@ class MetaPad extends Component {
           />         
           
              <li> {this.state.activeNote.id} </li> 
+             <DropDownCategorie
+             actCategorie = {this.state.categorie}
+             activeNote = {this.state.activeNote}
+             />
+
              <li>
                  <Image src= {this.state.activeNote.image} />  
               </li>         
@@ -124,6 +128,7 @@ class MetaPad extends Component {
     render (){
       const {notes, onAddNote} = this.props
       const {searchLoading, searchTerm,searchResults, file} = this.state
+
       return (
         <div>
            <AddDataForm
@@ -149,7 +154,6 @@ class MetaPad extends Component {
       
           </button>
           <div>
-              <DropDownCategorie/>
             </div>
 
           </div> 

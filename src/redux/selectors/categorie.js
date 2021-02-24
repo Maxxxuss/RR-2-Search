@@ -4,9 +4,9 @@ export const getCategorie = state => state.categorie;
 
 export const getAllCategories = createSelector(
     getCategorie,
-    categorie => categorie.map(categorie => ({
-        categorie: categorie.name ? categorie.name : ""
-    }))
+    // categorie => categorie.map(categorie => ({
+    //     categorie: categorie.name ? categorie.name : ""
+    // }))
 
 );
 

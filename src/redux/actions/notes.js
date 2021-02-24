@@ -65,7 +65,8 @@ export const startAddFile = (fileUrl = {}, ) => {
 export const startAddNotes = (notesData = {}, fileUrl = {}) => {
     return (dispatch, getState) => {
       const uid = getState().auth
-      const categorie = getState().categorie.id
+      const categorie = getState().categorie
+      
 
       const note = {
         buzwords: notesData.buzwords, 
@@ -73,9 +74,9 @@ export const startAddNotes = (notesData = {}, fileUrl = {}) => {
         content: notesData.titel,
         timestamp: firebase.database.ServerValue.TIMESTAMP,
         fileUrl: fileUrl,
-        categorie: notesData.categorie,
+        categorie: categorie.catName,
         }             
-       return firebase.database().ref(`users/${uid}/notes`).child(categorie).push(note).then((ref)=>{
+       return firebase.database().ref(`users/${uid}/notes`).child(categorie.id).push(note).then((ref)=>{
         
           dispatch(addNote({
             id: ref.key,           

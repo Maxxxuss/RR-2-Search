@@ -38,8 +38,7 @@ export default firebase
 
 // WEITER 3.37.51
 
-
-
+ 
 // SCHREIBEN von Daten in die DB 
     // database.ref().set({
     //     name: 'Peter Hacke',

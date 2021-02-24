@@ -11,8 +11,19 @@ const initalState = []
   const actionsMap = {
     [actionTypes.getAllCategories]: (state, action) => (state, action.allCategories),
     [actionTypes.allCategories]: (state, action) => (state, action.allCategories),
+  //  [actionTypes.editNotesContent] : (state, action) => (state, action.allCategories)
 
-
+    [actionTypes.editNotesContent] : (state, action) => (
+      state.map((note) => {
+          if (note.id === action.id) {
+            return {
+              ...note,
+              ...action.updates
+            };
+          } else {
+            return note;
+          };
+      })),
 
   }
   

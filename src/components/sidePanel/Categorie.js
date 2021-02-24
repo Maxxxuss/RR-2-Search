@@ -55,7 +55,7 @@ class Categories extends React.Component {
   
       const newCategorie = {
         id: key,
-        name: categorieName,
+        catName: categorieName,
         details: categorieDetails,
       };
   
@@ -101,11 +101,11 @@ class Categories extends React.Component {
         <Menu.Item
           key={categorie.id}
           onClick={() => this.changeCategorie(categorie)}
-          name={categorie.name}
+          name={categorie.catName}
           style={{ opacity: 0.7 }}
           active={categorie.id === this.state.activeCategorie}
         >
-          # {categorie.name}
+          # {categorie.catName}
         </Menu.Item>
       ));
   
