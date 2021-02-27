@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Downshift from 'downshift'
+import Downshift, { StateChangeTypes } from 'downshift'
 import {menuStyles, comboboxStyles} from '../../Styles/Categorie'
 import PropTypes from 'prop-types'
 import { categorie } from '../../redux/actions/action-types';
@@ -16,13 +16,12 @@ class DropDownCategorie extends Component {
 
     state = {
       allCategories: this.props.allCategories,
-      catName: "",
+      catName: categorie.catName ? categorie.catName : "",
       actCategorie: "",
-      categorie: "",
       activeNote: this.props.activeNote,
       isOpen: "" ,
-      notes: this.props.notes
-
+      notes: this.props.notes,
+      categorie: ""
         }
         
        getItems(filter) {
@@ -43,23 +42,56 @@ class DropDownCategorie extends Component {
         console.log(activeNote)
       }
 
-      onNoteEdit = (itemToString) => {
-        //ItemToString umfasst auch die Categorie Id --> mit dieser die Note löschen und in richtige Kate verschieben 
-        // e.preventDefault()
-        const updates = itemToString
+      onNoteEdit = () => {
+
+        const updates = this.state.categorie
+
         this.props.startEditNotesContent (this.props.activeNote, {updates})
-       // this.props.startEditNotesContent (this.props.activeNote.id, {categorie})
-        console.log("DropDown-ActiveNote-ID: " + this.props.activeNote.id)
+        // console.log("DropDown-ActiveNote-ID: " + this.props.activeNote.id)
+        console.log("sate catName" + this.state.catName)
         console.log("DropDown-Categorie: " + JSON.stringify(updates))
+        console.log("DorpDownCat-State-Cate: " + JSON.stringify(this.state.categorie))
+      }
+
+      handleSearchChange = itemToString => {
+        this.setState(
+          {
+            categorie: itemToString
+          },
+          () => this.onNoteEdit()
+        );
+      }
+
+       stateReducer = (state, changes) => {
+        // this prevents the menu from being closed when the user
+        // selects an item with a keyboard or mouse
+        switch (changes.type) {
+          case Downshift.stateChangeTypes.keyDownEnter:
+          case Downshift.stateChangeTypes.clickItem:
+            return {
+              ...changes,
+              isOpen: state.isOpen,
+              highlightedIndex: state.highlightedIndex,
+            }
+          default:
+            return changes
+        }
+      }
+
+      handelChange = (e) => {
+        e.preventDefault()
+
+        const categorie = e.target.value
+
+        this.setState(() => ({categorie}))
+
+
       }
 
       
       render () {
-        const {content} = this.state
         const {activeNote} = this.props
 
-        const items = this.props.allCategories
-        // const Items = this.state.allCategories
 
         return (
         <div
@@ -70,28 +102,24 @@ class DropDownCategorie extends Component {
         })}
         >
 
-          <div>
-            <button
-             onClick = { this.onNoteEdit}
+            {/* < button
+              onClick={this.onNoteEdit}
             >
-              Cat-Change
-            </button>
-          </div>
+              Handel Cahnge
+              </button> */}
+
+
+
 
         <Downshift
-          // onChange={(selection) =>
-          //   alert(
-          //     selection
-          //       ? `You selected ${itemToString(selection)}`
-          //       : 'selection cleared',
-          //   )
-          // }
+        stateReducer={ this.stateReducer}
+
 
           onChange={(itemToString)=>
-            {this.onNoteEdit(itemToString)}
-
+            {
+              this.handleSearchChange(itemToString)
+            }
           }
-          
           itemToString={itemToString}
         >
           {({
@@ -110,14 +138,19 @@ class DropDownCategorie extends Component {
               <Label {...getLabelProps()}>Select categorie</Label>
               <div {...css({position: 'relative'})}>
                 <Input
+                // placeholder= {activeNote ? activeNote.categorie : "Categorie" }
+                value ={this.state.categorie}
+                // onChange = {this.onContentChange}
+
                   {...getInputProps({
                     isOpen,
-                    placeholder: activeNote ? activeNote.categorie : 'Enter a catName',
-                    onChange: this.onContentChange
-                  }
+                    placeholder: activeNote ? activeNote.categorie : "Categorie" , 
+                    value: this.state.catName
 
+                   } 
                   )}
                 />
+
                 {selectedItem ? (
                   <ControllerButton
                     onClick={clearSelection}
@@ -137,6 +170,7 @@ class DropDownCategorie extends Component {
                     ? this.getItems(inputValue).map((item, index) => (
                         <Item
                           key={item.id}
+                          // onChange = {this.onContentChange}
                           {...getItemProps({
                             item,
                             index,
@@ -144,12 +178,14 @@ class DropDownCategorie extends Component {
                             isSelected: selectedItem === item,
                           })}
                         >
-                          {itemToString(item)}
+                          {itemToString(item)}, 
                         </Item>
                       ))
+
                     : null}
                 </BaseMenu>
               </div>
+
             </div>
           )}
         </Downshift>

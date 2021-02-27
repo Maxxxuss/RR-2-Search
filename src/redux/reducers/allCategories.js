@@ -11,20 +11,19 @@ const initalState = []
   const actionsMap = {
     [actionTypes.getAllCategories]: (state, action) => (state, action.allCategories),
     [actionTypes.allCategories]: (state, action) => (state, action.allCategories),
-  //  [actionTypes.editNotesContent] : (state, action) => (state, action.allCategories)
-    [actionTypes.editNotesContent]: (state, action) => (state.filter(({id} ) => id !== action.id)),
+    // [actionTypes.editNotesContent] : (state, action) => (state, action.editNotesContent),
 
-  //   [actionTypes.editNotesContent] : (state, action) => (
-  //     state.map((note) => {
-  //         if (note.id === action.id) {
-  //           return {
-  //             ...note,
-  //             ...action.updates
-  //           };
-  //         } else {
-  //           return note;
-  //         };
-  //     })),
+    [actionTypes.editNotesContent] : (state, action) => (
+      state.map((updates) => {
+          if (updates.id === action.id) {
+            return {
+              ...updates,
+              ...action.updates
+            };
+          } else {
+            return updates;
+          };
+      })),
 
   }
   
