@@ -12,6 +12,13 @@ export const notes = {
     setNotesOnCategorie: 'notes/setNotesOnCategorie',
     setCategorie: 'notes/setCategorie',
     getAllCategories: 'notes/getAllCategories',
+    editNotesContent: 'notes/editNotesContent',
+
+    // Categorie
+    getAllCategories: 'notes/getAllCategories',
+    setAllCatetegories: 'notes/setAllCatetegories',
+    editNotesContent: 'notes/editNotesContent',
+    startEditNotesContent: 'notes/startEditNotesContent'
 };
 
 
@@ -29,7 +36,6 @@ export const trash = {
 export const categorie = {
     getAllCategories: 'categories/getAllCategories',
     setAllCatetegories: 'categories/setAllCatetegories',
-    editNotesContent: 'categories/editNotesContent',
-    startEditNotesContent: 'categories/startEditNotesContent'
-
+    // editNotesContent: 'categories/editNotesContent',
+    // startEditNotesContent: 'categories/startEditNotesContent'
 };

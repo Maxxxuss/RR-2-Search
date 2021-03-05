@@ -4,7 +4,7 @@ import DropDownCategorie from '../components/MetaPad/DropDownCategorie'
 import { startAddFile,   } from '../redux/actions/notes';
 import { startShowTrashNotes } from '../redux/actions/trash';
 import {  getAllCategories } from '../redux/selectors/allCategories';
-import {startEditNotesContent} from '../redux/actions/categorie'
+import {startEditNotesContent} from '../redux/actions/notes'
 
 
 

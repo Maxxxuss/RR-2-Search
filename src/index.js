@@ -13,7 +13,7 @@ import {history} from './router/AppRouter'
 
 import "semantic-ui-css/semantic.min.css";
 import { startShowTrashNotes } from './redux/actions/trash';
-import { setAllCatetegories, setCategorie } from './redux/actions/categorie';
+import { setAllCatetegories, setCategorie } from './redux/actions/notes';
 
 
 

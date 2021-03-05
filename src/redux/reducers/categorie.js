@@ -12,8 +12,17 @@ const initalState = []
       [actionTypes.setNotesOnCategorie]: (state, action) => (state, action.notes),
 
 
-      
-
+    //   [actionTypes.editNotesContent] : (state, action) => (
+    //     state.map((updates) => {
+    //         if (updates.id === action.id) {
+    //           return {
+    //             ...updates,
+    //             ...action.updates
+    //           };
+    //         } else {
+    //           return updates;
+    //         };
+    //     })),
   }
   
   export default createReducer(initalState, actionsMap);

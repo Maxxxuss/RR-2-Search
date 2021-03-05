@@ -10,6 +10,9 @@ const actionsMap = {
 
     [actionTypes.addNote]: (state, { type, ...newNote }) => state
         .concat([newNote]),
+    // [actionTypes.editNotes] : (state, action) => (state.filter(({id} ) => id !== action.id)),
+    [actionTypes.editNotesContent] : (state, action) => (state.filter(({id} ) => id !== action.id)),
+
     [actionTypes.editNotes] : (state, action) => (
     state.map((note) => {
         if (note.id === action.id) {
@@ -21,7 +24,7 @@ const actionsMap = {
           return note;
         };
     })),
-    // [actionTypes.startAddTrash]: (state, action) => (state.filter(({ id }) => id !== action.id)),
+    [actionTypes.startAddTrash]: (state, action) => (state.filter(({ id }) => id !== action.id)),
     [actionTypes.setNotesOnCategorie]: (state, action) => (state, action.notes),
     [actionTypes.startAddNoteToTrash]: (state, action) => (state.filter(({id} ) => id !== action.id)),
 
