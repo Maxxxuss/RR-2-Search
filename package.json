@@ -23,6 +23,7 @@
     "emotion": "^11.0.0",
     "file-loader": "^6.1.0",
     "firebase": "^7.19.1",
+    "git": "^0.1.5",
     "history": "^5.0.0",
     "less": "^3.12.2",
     "match-sorter": "^6.2.0",

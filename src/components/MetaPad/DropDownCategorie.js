@@ -44,14 +44,16 @@ class DropDownCategorie extends Component {
 
       onNoteEdit = () => {
 
-        const updates = this.state.categorie
+       const updates = this.state.categorie
 
-        this.props.startEditNotesContent (this.props.activeNote, {updates})
+        this.props.startEditNotesContent(this.props.activeNote, {updates})
         // console.log("DropDown-ActiveNote-ID: " + this.props.activeNote.id)
         console.log("sate catName" + this.state.catName)
         console.log("DropDown-Categorie: " + JSON.stringify(updates))
         console.log("DorpDownCat-State-Cate: " + JSON.stringify(this.state.categorie))
       }
+
+
 
       handleSearchChange = itemToString => {
         this.setState(
@@ -84,15 +86,10 @@ class DropDownCategorie extends Component {
         const categorie = e.target.value
 
         this.setState(() => ({categorie}))
-
-
       }
-
       
       render () {
         const {activeNote} = this.props
-
-
         return (
         <div
         {...css({
@@ -118,6 +115,7 @@ class DropDownCategorie extends Component {
           onChange={(itemToString)=>
             {
               this.handleSearchChange(itemToString)
+              // this.onNoteEdit(itemToString)
             }
           }
           itemToString={itemToString}
@@ -138,9 +136,9 @@ class DropDownCategorie extends Component {
               <Label {...getLabelProps()}>Select categorie</Label>
               <div {...css({position: 'relative'})}>
                 <Input
-                // placeholder= {activeNote ? activeNote.categorie : "Categorie" }
-                value ={this.state.categorie}
-                // onChange = {this.onContentChange}
+                placeholder= {activeNote ? activeNote.categorie : "Categorie" }
+                // value ={this.state.categorie}
+                onChange = {this. onContentChange}
 
                   {...getInputProps({
                     isOpen,

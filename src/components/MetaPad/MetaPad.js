@@ -20,6 +20,9 @@ class MetaPad extends Component {
     searchResults: [],
     file: "",
     content: "" ,
+    buzwords: "" ,
+    description: "" ,
+
     notes: this.props.notes,
     trashData: "",
     categorie: this.props.categorie, 
@@ -36,6 +39,10 @@ class MetaPad extends Component {
     this.setState({ activeNote: note });
     this.setState({ file:  note.image })
     this.setState({content: note.content})
+    this.setState({description: note.description})
+    this.setState({buzwords: note.buzwords})
+
+
     this.setState({selectedNote: note})
     this.setState({categorie: note.categorie})
 
@@ -52,15 +59,28 @@ class MetaPad extends Component {
         </li>
       ))
 
-      oncontentChange = (e) => {
+      oncontentChangeContent = (e) => {
         const content = e.target.value
         this.setState (()=> ({content}))
+      }
+      oncontentChangeDescription = (e) => {
+        const description = e.target.value
+        this.setState (()=> ({description}))
+      }
+      oncontentChangeBuzword = (e) => {
+        const buzwords = e.target.value
+        this.setState (()=> ({buzwords}))
       }
 
       onNoteEdit = (e) => {
         e.preventDefault()
         const content = this.state.content
-        this.props.startEditNotes (this.state.activeNote.id, { content})
+        const description = this.state.description
+        const buzwords = this.state.buzwords
+
+        const updates = {content,description, buzwords}
+
+        this.props.startEditNotes (this.state.activeNote.id, updates)
       }
 
 
@@ -75,9 +95,25 @@ class MetaPad extends Component {
              autoFocus
              className="text-input"
              value={this.state.content}
-             onChange={ this.oncontentChange}
-          />         
-          
+             onChange={ this.oncontentChangeContent}
+          />    
+           <input          
+             type="text"
+             placeholder="Metadata-Buzwords"
+             autoFocus
+             className="text-input"
+             value={this.state.buzwords}
+             onChange={ this.oncontentChangeBuzword}
+          />    
+           <input          
+             type="text"
+             placeholder="Metadata-Description"
+             autoFocus
+             className="text-input"
+             value={this.state.description}
+             onChange={ this.oncontentChangeDescription}
+          />   
+
              <li> {this.state.activeNote.id} </li> 
              <DropDownCategorie
              actCategorie = {this.state.categorie}

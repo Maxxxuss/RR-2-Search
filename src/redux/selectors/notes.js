@@ -12,8 +12,15 @@ export const getAllNotes = createSelector(
         timestamp: note.timestamp ? note.timestamp : "", 
         fileUrl: note.fileUrl ? note.fileUrl : "",
         image: note.image ? note.image : "",
+        buzwords: note.buzwords ? note.buzwords : "", 
 
     }))
 );
 
 
+    // {
+    //     "rules": {
+    //     ".read": true,
+    //     ".write": true
+    //     }
+    // }

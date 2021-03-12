@@ -18,7 +18,6 @@ const mapDispatchToProps = (dispatch) => ({
     startShowTrashNotes: (notes) => dispatch(startShowTrashNotes(notes)),
     startEditNotesContent: (id, updates) => dispatch(startEditNotesContent(id, updates)),
 
-
 });
 
 export default connect(

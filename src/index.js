@@ -16,9 +16,22 @@ import { startShowTrashNotes } from './redux/actions/trash';
 import { setAllCatetegories, setCategorie } from './redux/actions/notes';
 
 
+import {LoginPage} from './components/LoginPage'
+import {Route} from "react-router-dom"
 
-
-// weiter 4:30
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch(startSetLogin(user.uid));
+      renderApp();
+      if (history.location.pathname === '/') {
+        history.push('/metapad');
+    };
+  } else {
+    store.dispatch(logout());
+    loginApp();
+    history.push('/');
+  }
+});
 
 const renderApp = () => {
   store.dispatch(setAllCatetegories())
@@ -33,17 +46,9 @@ store.dispatch(startShowTrashNotes()).then(()=>{
 })}
 
 
-
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    store.dispatch(startSetLogin(user.uid));
-      renderApp();
-      if (history.location.pathname === '/') {
-        history.push('/metapad');
-    };
-  } else {
-    store.dispatch(logout());
-    renderApp();
-    history.push('/');
-  }
-});
+const loginApp =() => {
+  ReactDOM.render(
+      <LoginPage/>,
+      document.getElementById('root')
+  )
+}

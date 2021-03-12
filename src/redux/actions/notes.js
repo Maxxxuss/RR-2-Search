@@ -200,13 +200,14 @@ export const getAllCategories = (allCategories) => {
   });
   
     
-  export const startEditNotesContent = (activeNote, {updates}) => {
+  export const startEditNotesContent = (activeNote, updates) => {
     return (dispatch, getState) => {
       const uid = getState().auth
       const categorie = getState().categorie.id
       const id = activeNote.id
       const pusNote = {
         categorie: activeNote.categorie, 
+        buzwords: activeNote.buzwords, 
         content: activeNote.content ,
         description: activeNote.description, 
         timestamp: activeNote.timestamp ,
@@ -228,10 +229,11 @@ export const getAllCategories = (allCategories) => {
 
             dispatch(editNotesContent(
               activeNote.id, 
-              updates)
-              
+              updates),
+
              );
             console.log("action ID" +id)
+
           });
     })    
   })    
