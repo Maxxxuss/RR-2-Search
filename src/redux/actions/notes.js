@@ -200,7 +200,7 @@ export const getAllCategories = (allCategories) => {
   });
   
     
-  export const startEditNotesContent = (activeNote, updates) => {
+  export const startEditNotesContent = (activeNote, {updates}) => {
     return (dispatch, getState) => {
       const uid = getState().auth
       const categorie = getState().categorie.id
