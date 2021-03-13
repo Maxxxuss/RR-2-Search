@@ -16,7 +16,10 @@ export const login = (uid) => ({
   
   export const firstStartLogin = () => {
     return () => {
+      console.log("LoginButten Pressed")
+
       return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+
     };
   };
   

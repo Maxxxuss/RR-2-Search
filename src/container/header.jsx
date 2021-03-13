@@ -4,6 +4,8 @@ import {getAllNotes} from '../redux/selectors/notes'
 
 import { startAddFile,  } from '../redux/actions/notes';
 import { startShowTrashNotes } from '../redux/actions/trash';
+import {startLogout} from '../redux/actions/auth'
+
 
 
 
@@ -13,7 +15,8 @@ const mapStateToProps = state =>( {
 
 const mapDispatchToProps = (dispatch) => ({
     onAddNote: (fileUrl) => dispatch(startAddFile(fileUrl)),
-    startShowTrashNotes: (notes) => dispatch(startShowTrashNotes(notes))
+    startShowTrashNotes: (notes) => dispatch(startShowTrashNotes(notes)),
+    startLogout:() => dispatch(startLogout())
 
 });
 

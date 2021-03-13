@@ -16,7 +16,7 @@ import { startShowTrashNotes } from './redux/actions/trash';
 import { setAllCatetegories, setCategorie } from './redux/actions/notes';
 
 
-import {LoginPage} from './components/LoginPage'
+import LoginPage from './container/login'
 import {Route} from "react-router-dom"
 
 firebase.auth().onAuthStateChanged((user) => {
@@ -48,7 +48,9 @@ store.dispatch(startShowTrashNotes()).then(()=>{
 
 const loginApp =() => {
   ReactDOM.render(
-      <LoginPage/>,
-      document.getElementById('root')
+    <Provider store={store}>
+      <LoginPage />
+    </Provider>,
+   document.getElementById('root')
   )
 }

@@ -21,6 +21,14 @@ class Header extends React.Component {
         return(
 
             <div>
+                       <button
+
+                    onClick = {()=> this.props.startLogout('/')}
+                    >
+                        Logout
+                    </button>
+
+
                 <h3>
                     <button
                     onClick = {() => this.sideTrash('/Metapad')}
@@ -35,6 +43,7 @@ class Header extends React.Component {
                             Show-Trash
                         </button>
                 </h3>
+
             </div>
         )  
     }
