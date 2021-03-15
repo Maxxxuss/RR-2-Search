@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Downshift, { StateChangeTypes } from 'downshift'
 import {menuStyles, comboboxStyles} from '../../Styles/Categorie'
 import PropTypes from 'prop-types'
-import { categorie } from '../../redux/actions/action-types';
+// import { categorie } from '../../redux/actions/action-types';
 import { Placeholder } from 'semantic-ui-react';
 import {matchSorter} from 'match-sorter'
 // import { css } from 
@@ -16,7 +16,8 @@ class DropDownCategorie extends Component {
 
     state = {
       allCategories: this.props.allCategories,
-      catName: categorie.catName ? categorie.catName : "",
+      // catName: categorie.catName ? categorie.catName : "",
+      catName: "", 
       actCategorie: "",
       activeNote: this.props.activeNote,
       isOpen: "" ,

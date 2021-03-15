@@ -13,6 +13,8 @@ export const notes = {
     setCategorie: 'notes/setCategorie',
     getAllCategories: 'notes/getAllCategories',
     editNotesContent: 'notes/editNotesContent',
+        setAllCatetegories: 'categories/setAllCatetegories',
+
 
     // Categorie
     getAllCategories: 'notes/getAllCategories',
@@ -33,9 +35,9 @@ export const trash = {
 };
 
 
-export const categorie = {
-    getAllCategories: 'categories/getAllCategories',
-    setAllCatetegories: 'categories/setAllCatetegories',
-    // editNotesContent: 'categories/editNotesContent',
-    // startEditNotesContent: 'categories/startEditNotesContent'
-};
+// export const categorie = {
+//     getAllCategories: 'categories/getAllCategories',
+//     setAllCatetegories: 'categories/setAllCatetegories',
+//     // editNotesContent: 'categories/editNotesContent',
+//     // startEditNotesContent: 'categories/startEditNotesContent'
+// };
