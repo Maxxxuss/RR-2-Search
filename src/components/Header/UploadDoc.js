@@ -15,7 +15,7 @@ class UploadDoc extends React.Component {
     percentUploaded: 0,
     note: "",
     channel: 1,
-    user: this.props.currentUser,
+    uid: this.props.auth, 
     loading: false,
     errors: [],
     modal: false,
@@ -40,7 +40,7 @@ class UploadDoc extends React.Component {
       messagesRef
         .child(channel.id)
         .push()
-        .set(this.onAddNote())
+        .set(this.startAddFile())
         .then(() => {
           this.setState({ loading: false, note: "", errors: [] });
         })
@@ -59,7 +59,8 @@ class UploadDoc extends React.Component {
   };
 
   uploadFile = (file, metadata) => {
-    const filePath = `chat/public/${uuidv4()}.jpg`;
+    const uid = this.state.uid
+    const filePath = `docs/${uid}/${uuidv4()}.jpg`;
 
 
     this.setState(
@@ -107,7 +108,7 @@ class UploadDoc extends React.Component {
   sendFileMessage = (ref) => {
     ref
       .push()
-      .set(this.props.onAddNote(this.state.fileUrl))
+      .set(this.props.startAddFile(this.state.fileUrl))
       .then(() => {
         this.setState({ uploadState: "done" });
       })
@@ -116,19 +117,27 @@ class UploadDoc extends React.Component {
   handelAddNote = (downloadUrl) => {
     const fileUrl = downloadUrl
     this.setState(()=> ({fileUrl}))
-    this.props.onAddNote(this.state.fileUrl)  
+    this.props.startAddFile(this.state.fileUrl)  
    };
+
+   showUID = () => {
+
+    return (getState) =>{
+     const user = this.state.user
+     console.log(user)}
+   }
 
   render() {
     // prettier-ignore
-    const {loading, modal } = this.state;
+    const {loading, modal} = this.state;
 
     return (
       <Segment className="message__form">
 
         <Button.Group icon widths="2">
         <Button
-            onClick={this.sendMessage}
+            // onClick={this.sendMessage}
+            onClick= {this.showUID()}
             disabled={loading}
             color="orange"
             content="Add Reply"

@@ -7,6 +7,8 @@ import PdfView from '../../components/Docs/pdfView/pdfView'
 import AddDataForm from './AddDataForm.js';
 import DropDownCategorie from '../../container/dropDownCategorie'
 import { Router, Route, Switch, Link, NavLink } from 'react-router-dom';
+import UploadDoc from "../Header/UploadDoc"
+
 
 
 class MetaPad extends Component {
@@ -162,7 +164,7 @@ class MetaPad extends Component {
     
     
     render (){
-      const {notes, onAddNote} = this.props
+      const {notes, onAddNote, startAddFile, auth} = this.props
       const {searchLoading, searchTerm,searchResults, file} = this.state
 
       return (
@@ -208,6 +210,14 @@ class MetaPad extends Component {
               <PdfView
               file = {file}
               />
+              <div>
+                <UploadDoc
+                startAddFile ={startAddFile}
+                auth = {auth}
+                
+                />
+
+              </div>
 
         </div>
       )

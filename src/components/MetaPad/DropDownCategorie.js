@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
-import Downshift, { StateChangeTypes } from 'downshift'
-import {menuStyles, comboboxStyles} from '../../Styles/Categorie'
-import PropTypes from 'prop-types'
-// import { categorie } from '../../redux/actions/action-types';
-import { Placeholder } from 'semantic-ui-react';
+import Downshift from 'downshift'
+
 import {matchSorter} from 'match-sorter'
-// import { css } from 
 import styled from '@emotion/styled'
 import { css as emoCSS } from '@emotion/css'
-import { getAllCategories } from '../../redux/selectors/allCategories';
-import { contentType } from 'mime-types';
 
 
 class DropDownCategorie extends Component {
